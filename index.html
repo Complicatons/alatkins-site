@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Al Atkins</title>
+<meta name="description" content="Al Atkins: founder and first vocalist of Judas Priest, songwriter of Victim of Changes, and still making heavy metal from the Black Country.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Grenze+Gotisch:wght@500..900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ── Tokens ─────────────────────────────────────────────
+   Forge soot base, cast-iron surfaces, steel hairlines.
+   Heat ramp (ember → flame → white-hot) only marks things that are "hot". */
+:root{
+  --soot:#17120F;
+  --soot-deep:#0F0B09;
+  --iron:#26201C;
+  --iron-hi:#332B26;
+  --ash:#8D847C;
+  --bone:#ECE3D4;
+  --steel:#A9B1B8;
+  --steel-dim:#5B6168;
+  --ember:#E2541B;
+  --flame:#FFB547;
+  --whitehot:#FFF4D6;
+  --crimson:#8A1C0B;
+  --blood:#B3121B;
+
+  --display:"Grenze Gotisch", "UnifrakturCook", Georgia, serif;
+  --sans:"Archivo", system-ui, sans-serif;
+
+  /* spacing scale: 4 · 8 · 16 · 24 · 40 · 64 · 104 · 168 */
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px; --s7:104px; --s8:168px;
+  --gutter:clamp(16px, 4vw, 56px);
+  --measure:62ch;
+
+  --spring:cubic-bezier(.2,.9,.25,1.15);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  /* layered, heat-tinted shadows */
+  --lift-1:0 1px 0 rgba(255,244,214,.04) inset, 0 1px 2px rgba(15,11,9,.5), 0 6px 16px -6px rgba(138,28,11,.18);
+  --lift-2:0 1px 0 rgba(255,244,214,.05) inset, 0 2px 4px rgba(15,11,9,.5), 0 18px 40px -12px rgba(138,28,11,.28), 0 40px 80px -30px rgba(15,11,9,.8);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--soot)}
+body{
+  margin:0;background:var(--soot);color:var(--bone);
+  font-family:var(--sans);font-size:17px;line-height:1.7;font-variation-settings:"wdth" 100;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--ember);color:var(--whitehot)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* film grain over everything */
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* ── Focus + interactive states ── */
+:focus-visible{outline:2px solid var(--flame);outline-offset:4px;border-radius:2px}
+
+/* ── Nav ── */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  padding:var(--s3) var(--gutter);transition:transform .5s var(--ease-out), opacity .5s var(--ease-out)}
+.nav::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s var(--ease-out);
+  background:linear-gradient(to bottom, rgba(15,11,9,.92), rgba(15,11,9,.72));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 rgba(169,177,184,.08)}
+.nav.is-solid::before{opacity:1}
+.nav.is-hidden{transform:translateY(-100%)}
+.wordmark{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;text-decoration:none;color:var(--bone);
+  display:inline-block;transition:transform .35s var(--spring), opacity .2s}
+.wordmark:hover{transform:translateY(-1px)}
+.wordmark:active{transform:translateY(1px) scale(.98)}
+.nav ul{display:flex;gap:clamp(12px,2.4vw,32px);list-style:none;margin:0;padding:0}
+.nav-link{position:relative;font-size:15px;font-weight:500;text-decoration:none;color:var(--steel);padding:6px 0;display:inline-block;transition:transform .3s var(--spring)}
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--ember),var(--flame));
+  transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
+.nav-link .hot{position:absolute;inset:6px 0 auto 0;color:var(--whitehot);opacity:0;transition:opacity .25s}
+.nav-link:hover .hot,.nav-link:focus-visible .hot{opacity:1}
+.nav-link:hover::after,.nav-link:focus-visible::after{transform:scaleX(1)}
+.nav-link:active{transform:translateY(1px)}
+.nav-toggle{display:none}
+@media (max-width:760px){
+  .nav ul{display:none}
+  .nav-toggle{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid rgba(169,177,184,.25);color:var(--bone);
+    font:500 15px var(--sans);padding:8px 14px;border-radius:999px;cursor:pointer;transition:transform .3s var(--spring)}
+  .nav-toggle:hover{transform:translateY(-1px)}
+  .nav-toggle:active{transform:scale(.96)}
+  .nav.is-open ul{display:flex;position:absolute;top:100%;left:var(--gutter);right:var(--gutter);flex-direction:column;gap:0;
+    background:var(--iron);border-radius:14px;padding:8px 20px;box-shadow:var(--lift-2)}
+  .nav.is-open .nav-link{padding:12px 0;font-size:18px;color:var(--bone)}
+}
+
+/* ── Hero: his career flicks past on a pile of records, then the lights come up on the stage ── */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;isolation:isolate;background:#040405}
+.hero-shake{position:absolute;inset:0}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero #fx{z-index:3}
+.hero h1{margin:0}
+.hero h1:not(.sr-only){position:absolute;z-index:3;left:0;right:0;top:26%;text-align:center;font:900 clamp(84px,19vw,300px)/.85 var(--display);color:var(--bone)}
+.hero-portrait{position:absolute;z-index:2;left:50%;top:0;width:min(78vh, 92vw);aspect-ratio:1;margin:0;transform:translateX(-50%);opacity:0;mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(closest-side, #000 50%, transparent 100%);mask-image:radial-gradient(closest-side, #000 50%, transparent 100%)}
+.hero-portrait.is-lit{animation:portraitIn 2.2s var(--ease-out) forwards}
+@keyframes portraitIn{from{opacity:0;transform:translateX(-50%) scale(1.05)}to{opacity:.95;transform:translateX(-50%) scale(1)}}
+.hero-copy{position:absolute;z-index:5;left:0;right:0;padding:0 var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
+.hero-line{margin:0;max-width:34ch;text-wrap:balance;font-size:clamp(18px, 2.1vw, 24px);line-height:1.45;font-weight:400;color:var(--bone);font-variation-settings:"wdth" 92;
+  text-shadow:0 2px 18px rgba(0,0,0,.9)}
+.hero-line strong{font-weight:700;color:#fff}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);justify-content:center}
+.reveal-late{opacity:0;transform:translateY(14px)}
+.is-ready .reveal-late{opacity:1;transform:none;transition:opacity 1s var(--ease-out), transform 1.1s var(--spring)}
+.is-ready .reveal-late.d2{transition-delay:.25s}
+
+  /* ── two more photos of Al either side of the main one, blended into the dark the same way ── */
+  .hero-side{position:absolute;z-index:0;top:4vh;height:min(72vh, 52vw);aspect-ratio:3/4;margin:0;opacity:0;pointer-events:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 38%, transparent 100%);mask-image:radial-gradient(closest-side, #000 38%, transparent 100%)}
+  .hero-side img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.3) brightness(.6)}
+  .hero-side::after{content:"";position:absolute;inset:0;mix-blend-mode:multiply;background:var(--tint, linear-gradient(to top, #160a0c, #8d95a8))}
+  .hero-side.l{left:1vw;-webkit-mask-image:radial-gradient(closest-side at 40% 40%, #000 38%, transparent 100%);mask-image:radial-gradient(closest-side at 40% 40%, #000 38%, transparent 100%)}
+  .hero-side.r{right:1vw;-webkit-mask-image:radial-gradient(closest-side at 52% 38%, #000 38%, transparent 100%);mask-image:radial-gradient(closest-side at 52% 38%, #000 38%, transparent 100%)}
+  .hero-portrait.is-lit ~ .hero-side{animation:sideIn 2.8s var(--ease-out) forwards}
+  .hero-portrait.is-lit ~ .hero-side.r{animation-delay:.18s}
+  @keyframes sideIn{from{opacity:0;transform:scale(1.04)}to{opacity:.72;transform:scale(1)}}
+  @media (max-width:760px){.hero-side{display:none}}
+  @media (prefers-reduced-motion: reduce){.hero-portrait.is-lit ~ .hero-side{animation:none;opacity:.72}}
+
+  /* ── the career reel: his story flicks past before the lights come up ── */
+  .reel{--card:min(44vh,66vw);position:absolute;inset:0;z-index:20;background:radial-gradient(80% 70% at 50% 42%, #111116, #030304 70%);
+    transition:opacity .9s var(--ease-out)}
+  .reel.is-out{opacity:0;pointer-events:none}
+  .reel-stack{position:absolute;left:50%;top:40%;width:var(--card);height:var(--card);margin:calc(var(--card) / -2) 0 0 calc(var(--card) / -2)}
+  .reel-card{position:absolute;inset:0;overflow:hidden;background:#0b0b0d;
+    box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 80px -30px rgba(0,0,0,.95),0 18px 40px -20px rgba(0,0,0,.8)}
+  .reel-card img{display:block;width:100%;height:100%;object-fit:cover}
+  .reel-card.is-photo img{filter:grayscale(1) contrast(1.12)}
+  .reel-card::before{content:"";position:absolute;inset:0;z-index:1;background:#000;opacity:0;transition:opacity .35s var(--ease-out)}
+  .reel-card.is-under::before{opacity:.6}
+  .reel-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.35), transparent 45%)}
+  .reel-meta{position:absolute;left:0;right:0;top:calc(40% + var(--card) / 2 + 20px);text-align:center;padding:0 var(--gutter)}
+  .reel-year{margin:0;font:900 clamp(56px,9vw,112px)/.9 var(--display);letter-spacing:-.02em;
+    background:linear-gradient(180deg,#fff 0%,#d8dee6 40%,#7e8896 55%,#e9edf2 75%,#b7bfca 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .reel-cap{margin:10px 0 0;font:500 16px/1.4 var(--sans);color:var(--steel)}
+  .hero .reel-skip{position:absolute;z-index:21;right:var(--gutter);bottom:28px;font:600 14px/1 var(--sans);color:var(--steel);cursor:pointer;
+    padding:11px 18px;border:0;border-radius:999px;background:rgba(16,16,21,.6);box-shadow:0 0 0 1px rgba(169,177,184,.25) inset;
+    transition:opacity .3s var(--ease-out),transform .35s var(--spring)}
+  .reel-skip:hover{transform:translateY(-1px);opacity:.85}
+  .reel-skip:active{transform:scale(.96)}
+  .reel-skip:focus-visible{outline:2px solid var(--steel);outline-offset:3px}
+  .reel.is-out ~ .hero .reel-skip{opacity:0;pointer-events:none}
+
+  @media (prefers-reduced-motion: reduce){.reel{display:none}.hero .reel-skip{display:none}}
+  .is-ready .reveal-late.d3{transition-delay:.5s}
+  .is-ready .reveal-late.d4{transition-delay:.8s}
+
+  /* ── buttons: chrome with a spark of lightning round the edge on hover ── */
+  .spark{position:relative}
+  .crackle{position:absolute;left:-10px;top:-10px;width:calc(100% + 20px);height:calc(100% + 20px);overflow:visible;pointer-events:none;opacity:0;transition:opacity .2s;
+    filter:drop-shadow(0 0 4px rgba(150,180,255,.9)) drop-shadow(0 0 12px rgba(120,150,255,.6))}
+  .crackle path{fill:none;stroke-linejoin:round;stroke-linecap:round}
+  .crackle .glow{stroke:#8fb0ff;stroke-width:4;opacity:.45}
+  .crackle .core{stroke:#eef4ff;stroke-width:1.4}
+  .spark.is-live .crackle{opacity:1}
+  .btn:focus-visible{outline:2px solid var(--steel);outline-offset:4px}
+
+  /* ── social links under the buttons: guitar picks tinted for each network ── */
+  .picks{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 0;padding:0;list-style:none}
+  .picks a{position:relative;display:grid;place-items:center;width:52px;height:57px;color:#fff;border-radius:14px;transition:transform .4s var(--spring)}
+  .picks .pk{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .picks .pk-base{filter:drop-shadow(0 10px 12px rgba(0,0,0,.85))}
+  .picks .pk-hi{opacity:0;transition:opacity .35s var(--ease-out)}
+  .picks .ico{position:relative;width:19px;height:19px;margin-top:-8px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  .picks a{transform:rotate(var(--r,0deg))}
+  .picks li:nth-child(1) a{--r:-7deg} .picks li:nth-child(2) a{--r:4deg} .picks li:nth-child(3) a{--r:-3deg}
+  .picks a:hover{transform:rotate(calc(var(--r,0deg) - 10deg)) translateY(-3px)}
+  .picks a:hover .pk-hi,.picks a:focus-visible .pk-hi{opacity:1}
+  .picks a:active{transform:rotate(calc(var(--r,0deg) - 4deg)) scale(.92)}
+  .picks a:focus-visible{outline:2px solid var(--steel);outline-offset:3px}
+
+  /* ── the record in the corner: turns slowly, spins up when you point at it ── */
+  .corner-rec{position:absolute;z-index:6;right:var(--gutter);bottom:34px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--bone)}
+  .corner-rec .lbl{font:600 14px/1.25 var(--sans);text-align:right;color:var(--steel);opacity:0;transform:translateX(8px);transition:opacity .35s var(--ease-out),transform .45s var(--spring)}
+  .corner-rec .lbl b{display:block;font-weight:600;color:var(--bone)}
+  .corner-rec:hover .lbl,.corner-rec:focus-visible .lbl{opacity:1;transform:none}
+  .vinyl-wrap{position:relative;width:72px;height:72px;flex:none;transition:transform .5s var(--spring)}
+  .corner-rec:hover .vinyl-wrap{transform:scale(1.06)}
+  .corner-rec:active .vinyl-wrap{transform:scale(.96)}
+  .corner-rec:focus-visible{outline:none}
+  .corner-rec:focus-visible .vinyl-wrap{outline:2px solid var(--steel);outline-offset:4px;border-radius:50%}
+  .vinyl{position:absolute;inset:0;border-radius:50%;
+    background:
+      radial-gradient(circle, #ece3d4 0 1.9px, #0a0a0b 2.6px 3.6px, var(--blood) 4.2px 18px, #0a0a0b 18.6px 20.4px, transparent 21px),
+      repeating-radial-gradient(circle, #111114 0 1px, #1f1f24 1.5px 2.5px),#0e0e10;
+    box-shadow:0 0 0 1px rgba(255,255,255,.07) inset,0 12px 26px -8px rgba(0,0,0,.95),0 0 30px -8px rgba(179,18,27,.35)}
+  .vinyl i{position:absolute;left:50%;top:50%;transform:translate(-50%,-125%);font:normal 800 8px/1 var(--display);color:#ece3d4;white-space:nowrap}
+  .vinyl-sheen{position:absolute;inset:0;border-radius:50%;pointer-events:none;
+    background:conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.14) 12%, transparent 18% 52%, rgba(255,255,255,.1) 58%, transparent 64%);
+    -webkit-mask:radial-gradient(circle, transparent 0 20px, #000 21px);mask:radial-gradient(circle, transparent 0 20px, #000 21px)}
+  @media (max-width:760px){
+    .corner-rec{bottom:24px}
+    .corner-rec .lbl{display:none}
+    .vinyl-wrap{width:58px;height:58px}
+    .vinyl{background:
+      radial-gradient(circle, #ece3d4 0 1.6px, #0a0a0b 2.2px 3px, var(--blood) 3.5px 14.5px, #0a0a0b 15px 16.5px, transparent 17px),
+      repeating-radial-gradient(circle, #111114 0 1px, #1f1f24 1.5px 2.5px),#0e0e10}
+    .vinyl i{font-size:6.5px}
+    .vinyl-sheen{-webkit-mask:radial-gradient(circle, transparent 0 16px, #000 17px);mask:radial-gradient(circle, transparent 0 16px, #000 17px)}
+  }
+
+  /* the photos of Al are screened into the dark, so only the lit parts show */
+  .hero-portrait,.hero-side{z-index:2;mix-blend-mode:screen}
+  .hero-portrait img,.hero-side img{width:100%;height:100%;object-fit:cover;opacity:.76;filter:grayscale(1) contrast(1.25) brightness(1.13)}
+  .hero-side::after{display:none}
+
+/* ── Buttons ── */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font:600 16px/1 var(--sans);
+  font-variation-settings:"wdth" 96;text-decoration:none;cursor:pointer;border:0;isolation:isolate;
+  transition:transform .35s var(--spring), opacity .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn-hot{color:#1b0d06;background:linear-gradient(180deg, var(--whitehot) -30%, var(--flame) 35%, var(--ember) 120%);
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 -2px 0 rgba(138,28,11,.35) inset, 0 8px 24px -8px rgba(226,84,27,.65), 0 20px 50px -20px rgba(226,84,27,.5)}
+.btn-hot::after{content:"";position:absolute;inset:-6px;border-radius:inherit;z-index:-1;opacity:0;transition:opacity .3s;
+  background:radial-gradient(closest-side, rgba(255,181,71,.55), transparent)}
+.btn-hot:hover::after{opacity:1}
+.btn-steel{color:var(--bone);background:rgba(38,32,28,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  box-shadow:0 0 0 1px rgba(169,177,184,.28) inset, 0 8px 22px -12px rgba(0,0,0,.8)}
+.btn-steel:hover{box-shadow:0 0 0 1px rgba(255,181,71,.6) inset, 0 8px 22px -12px rgba(226,84,27,.5)}
+.btn-chrome{color:#101216;background:linear-gradient(180deg,#fff 0%,#D8DEE6 38%,#7E8896 52%,#E9EDF2 70%,#B7BFCA 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 -1px 0 rgba(0,0,0,.35) inset,0 10px 26px -10px rgba(180,200,255,.45)}
+.btn-ghost{color:var(--bone);background:rgba(20,20,26,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 0 1px rgba(169,177,184,.3) inset}
+.btn-ghost:hover{box-shadow:0 0 0 1px rgba(220,230,255,.7) inset}
+
+/* ── Sections: quiet, disciplined, left-aligned ── */
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+.section{position:relative;padding:var(--s8) 0}
+.section + .section{border-top:1px solid rgba(169,177,184,.07)}
+.h2{font-family:var(--display);font-weight:800;font-size:clamp(52px, 7.4vw, 108px);line-height:.92;letter-spacing:-.01em;margin:0 0 var(--s5);color:var(--bone);text-wrap:balance}
+.lede{font-size:clamp(19px, 1.7vw, 22px);line-height:1.6;color:var(--bone);max-width:var(--measure);margin:0 0 var(--s4);text-wrap:pretty}
+.prose p{max-width:var(--measure);margin:0 0 var(--s4);color:#D6CCBD;text-wrap:pretty}
+.prose em{font-style:italic;color:var(--bone)}
+.muted{color:var(--ash)}
+.photo{position:relative;overflow:hidden;border-radius:6px;background:var(--iron);box-shadow:var(--lift-2)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(15,11,9,.6), transparent 45%);}
+.photo.treated img{filter:grayscale(.15) contrast(1.05)}
+.photo.treated::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;background:linear-gradient(160deg, #F0E2C8, #C9A78A)}
+figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);max-width:60ch}
+
+/* scroll reveal: one gentle settle per block, not per element */
+.rise{opacity:0;transform:translateY(24px)}
+.rise.is-in{opacity:1;transform:none;transition:opacity .9s var(--ease-out), transform 1s var(--ease-out)}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s5) var(--s4);align-items:start}
+.story-photo{grid-column:1 / span 5;aspect-ratio:4/5;position:sticky;top:96px}
+.story-text{grid-column:7 / span 6}
+.pull{margin:var(--s6) 0 0;padding:var(--s4) 0 0;border-top:1px solid rgba(169,177,184,.15);max-width:var(--measure)}
+.pull blockquote{margin:0;font-family:var(--sans);font-weight:600;font-variation-settings:"wdth" 78;font-size:clamp(26px,2.6vw,36px);line-height:1.18;letter-spacing:-.015em;color:var(--bone);text-wrap:balance}
+.pull figcaption{margin-top:var(--s3)}
+@media (max-width:900px){.story-photo,.story-text{grid-column:1 / -1}.story-photo{position:relative;top:0;max-width:520px}}
+
+/* timeline: a molten line fills as you read, each year heats when reached */
+.tl{position:relative;margin-top:var(--s6)}
+.tl-spine{position:absolute;left:calc(var(--year-col) + 28px);top:0;bottom:0;width:2px;background:rgba(169,177,184,.14)}
+.tl-fill{position:absolute;inset:0;transform-origin:top;transform:scaleY(0);
+  background:linear-gradient(to bottom, var(--crimson), var(--ember) 60%, var(--flame) 92%, var(--whitehot));
+  box-shadow:0 0 12px rgba(226,84,27,.7), 0 0 30px rgba(226,84,27,.35)}
+.tl{--year-col:clamp(120px, 15vw, 210px)}
+.era{position:relative;display:grid;grid-template-columns:var(--year-col) 56px minmax(0,1fr);padding:0 0 var(--s7)}
+.era:last-child{padding-bottom:0}
+.era-year{position:relative;font-family:var(--sans);font-weight:800;font-variation-settings:"wdth" 70;font-size:clamp(40px, 5.4vw, 76px);line-height:.9;letter-spacing:-.02em;text-align:right;color:var(--steel-dim);align-self:start;position:sticky;top:110px}
+.era-year .hot{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease-out);
+  background:linear-gradient(to bottom, var(--whitehot), var(--flame) 50%, var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(226,84,27,.45))}
+.era.is-hot .era-year .hot{opacity:1}
+.era-year small{display:block;font-size:.34em;letter-spacing:0;font-weight:600;margin-top:6px}
+.era-node{position:relative;justify-self:center;width:14px;height:14px;margin-top:clamp(14px,2vw,26px);border-radius:50%;background:var(--soot);box-shadow:0 0 0 2px rgba(169,177,184,.3)}
+.era-node::after{content:"";position:absolute;inset:-2px;border-radius:50%;opacity:0;transform:scale(.4);transition:opacity .5s, transform .7s var(--spring);
+  background:radial-gradient(circle, var(--whitehot), var(--flame) 45%, var(--ember));box-shadow:0 0 14px 3px rgba(255,181,71,.6)}
+.era.is-hot .era-node::after{opacity:1;transform:scale(1)}
+.era-body{min-width:0}
+.era-title{font-family:var(--display);font-weight:700;font-size:clamp(30px, 3.2vw, 46px);line-height:1;margin:clamp(4px,1vw,14px) 0 var(--s3);color:var(--bone)}
+.era-body p{max-width:var(--measure);margin:0 0 var(--s3);color:#D6CCBD}
+.era-body .facts{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s3) 0 0;padding:0;list-style:none}
+.era-body .facts li{font-size:14px;line-height:1.3;padding:7px 12px;border-radius:999px;background:rgba(38,32,28,.8);box-shadow:0 0 0 1px rgba(169,177,184,.12) inset;color:var(--steel)}
+.tl-list{list-style:none;margin:0;padding:0}
+/* columns sized by each photo's aspect ratio so a pair shares one height, uncropped */
+.era-photos{display:grid;gap:var(--s3);margin-top:var(--s4);grid-template-columns:var(--cols, repeat(var(--n,1), minmax(0,1fr)));max-width:860px;align-items:start}
+.era-photos .photo{aspect-ratio:var(--ar, 4/3)}
+@media (max-width:760px){
+  .tl{--year-col:0px}
+  .tl-spine{left:6px}
+  .era{grid-template-columns:28px minmax(0,1fr);padding-bottom:var(--s6)}
+  .era-year{grid-column:2;grid-row:1;text-align:left;position:relative;top:0;font-size:44px;margin-bottom:var(--s2)}
+  .era-node{grid-column:1;grid-row:1;justify-self:start;margin-top:12px}
+  .era-body{grid-column:2}
+}
+
+/* songs: the credits, set large */
+.songs{list-style:none;margin:var(--s6) 0 0;padding:0;border-top:1px solid rgba(169,177,184,.14)}
+.song{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s2) var(--s5);align-items:baseline;padding:var(--s4) 0;border-bottom:1px solid rgba(169,177,184,.14)}
+.song-name{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(40px, 6.4vw, 92px);line-height:.95;color:var(--bone)}
+.song-name .hot{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--ease-out);
+  background:linear-gradient(to bottom, var(--whitehot), var(--flame) 45%, var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.song:hover .song-name .hot{opacity:1}
+.song-meta{text-align:right;font-size:15px;line-height:1.5;color:var(--ash);max-width:34ch}
+.song-meta strong{display:block;color:var(--steel);font-weight:600}
+.song-albums{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:var(--s5);margin-top:var(--s6);max-width:860px}
+@media (max-width:760px){.song{grid-template-columns:1fr}.song-meta{text-align:left}}
+
+/* records */
+.shelf-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);margin:var(--s6) 0 var(--s4);flex-wrap:wrap}
+.shelf-head h3{font-family:var(--display);font-weight:700;font-size:clamp(28px,2.8vw,38px);line-height:1;margin:0}
+.shelf-head p{margin:0;color:var(--ash);font-size:15px}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill, minmax(min(44%, 220px), 1fr));gap:var(--s5) var(--s4);list-style:none;margin:0;padding:0}
+.record{perspective:900px}
+.record-art{position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;background:var(--iron);box-shadow:var(--lift-2);
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);transition:transform .5s var(--spring)}
+.record-art img{width:100%;height:100%;object-fit:cover}
+.record-art::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,30%), rgba(255,244,214,.28), transparent 55%)}
+.record:hover .record-art::after{opacity:1}
+.record-title{margin:var(--s3) 0 0;font-weight:700;font-size:17px;line-height:1.3;color:var(--bone)}
+.record-meta{margin:2px 0 0;font-size:14px;line-height:1.45;color:var(--ash)}
+.record-art.blank{display:grid;place-items:center;text-align:center;padding:var(--s4);
+  background:radial-gradient(circle at 50% 120%, rgba(226,84,27,.28), transparent 60%), var(--iron)}
+.record-art.blank span{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;color:var(--steel)}
+
+/* now */
+.now-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s5) var(--s4);align-items:center}
+.now-photo{grid-column:1 / span 6;aspect-ratio:850/784}
+.now-text{grid-column:8 / span 5}
+@media (max-width:900px){.now-photo,.now-text{grid-column:1 / -1}}
+.link-row{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
+
+/* follow */
+.follow-list{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.follow-card{position:relative;display:flex;flex-direction:column;gap:var(--s2);padding:var(--s5) var(--s4);border-radius:14px;text-decoration:none;
+  background:linear-gradient(180deg, var(--iron-hi), var(--iron));box-shadow:var(--lift-1);transition:transform .45s var(--spring)}
+.follow-card::before{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .35s;pointer-events:none;
+  box-shadow:0 0 0 1px rgba(255,181,71,.55) inset, 0 20px 50px -20px rgba(226,84,27,.55)}
+.follow-card:hover{transform:translateY(-4px)}
+.follow-card:hover::before,.follow-card:focus-visible::before{opacity:1}
+.follow-card:active{transform:translateY(-1px) scale(.99)}
+.follow-card svg{width:28px;height:28px;color:var(--flame)}
+.follow-card strong{font-size:22px;line-height:1.2;color:var(--bone)}
+.follow-card span{color:var(--ash);font-size:15px}
+@media (max-width:760px){.follow-list{grid-template-columns:1fr}}
+
+.footer{padding:var(--s7) 0 var(--s6);border-top:1px solid rgba(169,177,184,.08);background:var(--soot-deep)}
+.footer .footer-mark{max-width:none;font-family:var(--display);font-weight:900;font-size:clamp(64px,12vw,170px);line-height:.85;color:transparent;-webkit-text-stroke:1px rgba(169,177,184,.28);margin:0 0 var(--s5)}
+.footer p{font-size:14px;color:var(--ash);max-width:80ch;margin:0 0 var(--s2)}
+.footer a{color:var(--steel);text-underline-offset:3px}
+.footer a:hover{color:var(--flame)}
+.text-link{color:var(--flame);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:opacity .2s}
+.text-link:hover{opacity:.8}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .grain{animation:none}
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important;animation-iteration-count:1 !important}
+  .reveal-late,.rise{opacity:1;transform:none}
+  .record-art{transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.6 21.5v-8h2.7l.4-3.2h-3.1V8.3c0-.9.3-1.6 1.6-1.6h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.6v3.2h2.7v8z"/></symbol><symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.8L22.1 21h-6.3l-4.9-6.4L5.3 21H2.2l7.3-8.3L2.1 3h6.4l4.4 5.9zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></symbol><defs><linearGradient id="pk-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="pk-fb-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#27509f"/><stop offset="1.00" stop-color="#0f2453"/></linearGradient><linearGradient id="pk-fb-gh" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#3f7cf0"/><stop offset="1.00" stop-color="#1747a6"/></linearGradient><linearGradient id="pk-ig-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0.00" stop-color="#5e2c80"/><stop offset="0.50" stop-color="#9c2453"/><stop offset="1.00" stop-color="#a85a2b"/></linearGradient><linearGradient id="pk-ig-gh" x1="0" y1="0" x2="1" y2="1"><stop offset="0.00" stop-color="#8a3ab9"/><stop offset="0.50" stop-color="#e1306c"/><stop offset="1.00" stop-color="#f9a23f"/></linearGradient><linearGradient id="pk-x-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#3a3a43"/><stop offset="1.00" stop-color="#0e0e12"/></linearGradient><linearGradient id="pk-x-gh" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#64646f"/><stop offset="1.00" stop-color="#1c1c22"/></linearGradient></defs><symbol id="pk-fb" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-fb-g)" stroke="rgba(150,185,255,.6)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol><symbol id="pk-fb-hi" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-fb-gh)" stroke="rgba(150,185,255,.6)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol><symbol id="pk-ig" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-ig-g)" stroke="rgba(255,185,150,.55)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol><symbol id="pk-ig-hi" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-ig-gh)" stroke="rgba(255,185,150,.55)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol><symbol id="pk-x" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-x-g)" stroke="rgba(225,230,238,.5)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol><symbol id="pk-x-hi" viewBox="0 0 44 48"><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-x-gh)" stroke="rgba(225,230,238,.5)" stroke-width="1"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="url(#pk-sheen)"/><path d="M22 2C31 2 40 4 41.5 9.5 43 15 38 26 28.5 40c-3 4.5-10 4.5-13 0C6 26 1 15 2.5 9.5 4 4 13 2 22 2z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.1" transform="matrix(.82 0 0 .82 3.96 3.6)"/></symbol></svg>
+
+<header class="nav" id="nav">
+  <a class="wordmark" href="#top" aria-label="Al Atkins, back to top">Al Atkins</a>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">Menu</button>
+  <nav aria-label="Main">
+    <ul id="nav-list">
+      <li><a class="nav-link" href="#story">Story<span class="hot" aria-hidden="true">Story</span></a></li>
+      <li><a class="nav-link" href="#timeline">Timeline<span class="hot" aria-hidden="true">Timeline</span></a></li>
+      <li><a class="nav-link" href="#songs">The songs<span class="hot" aria-hidden="true">The songs</span></a></li>
+      <li><a class="nav-link" href="#records">Records<span class="hot" aria-hidden="true">Records</span></a></li>
+      <li><a class="nav-link" href="#now">Now<span class="hot" aria-hidden="true">Now</span></a></li>
+      <li><a class="nav-link" href="#follow">Follow<span class="hot" aria-hidden="true">Follow</span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-label="Al Atkins">
+  <div class="hero-shake" id="shake">
+    <figure class="hero-portrait" id="portrait" aria-hidden="true" style="margin:0"><img src="live-photo.jpg" fetchpriority="high" alt="" width="986" height="986"></figure>
+    <figure class="hero-side l" aria-hidden="true"><img src="images/web/live-shades-leather-jacket.jpg" alt="" width="463" height="662"></figure>
+    <figure class="hero-side r" aria-hidden="true"><img src="images/web/live-horns-up-mic.jpg" alt="" width="592" height="700"></figure>
+    <h1 class="sr-only">Al Atkins</h1>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <canvas id="fx" aria-hidden="true"></canvas>
+  </div>
+  <div class="hero-copy" id="copy">
+    <p class="hero-line reveal-late">The first voice of <strong>Judas Priest</strong>. Singer and songwriter from West Bromwich, making heavy music since before it had a name.</p>
+    <div class="hero-actions reveal-late d2">
+      <a class="btn btn-chrome spark" href="#story">Read his story<svg class="crackle" aria-hidden="true"><path class="glow"/><path class="core"/></svg></a>
+      <a class="btn btn-ghost spark" href="#records">Hear the records<svg class="crackle" aria-hidden="true"><path class="glow"/><path class="core"/></svg></a>
+    </div>
+    <ul class="picks reveal-late d3" aria-label="Al Atkins on social media"><li><a href="https://www.facebook.com/allan.atkins.7" target="_blank" rel="noopener" aria-label="Facebook"><svg class="pk pk-base" aria-hidden="true"><use href="#pk-fb"/></svg><svg class="pk pk-hi" aria-hidden="true"><use href="#pk-fb-hi"/></svg><svg class="ico" aria-hidden="true"><use href="#i-fb"/></svg></a></li><li><a href="https://www.instagram.com/alatkins_/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="pk pk-base" aria-hidden="true"><use href="#pk-ig"/></svg><svg class="pk pk-hi" aria-hidden="true"><use href="#pk-ig-hi"/></svg><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg></a></li><li><a href="https://x.com/REALAlAtkins" target="_blank" rel="noopener" aria-label="X"><svg class="pk pk-base" aria-hidden="true"><use href="#pk-x"/></svg><svg class="pk pk-hi" aria-hidden="true"><use href="#pk-x-hi"/></svg><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></a></li></ul>
+  </div>
+  <a class="corner-rec reveal-late d4" id="cornerRec" href="#records">
+    <span class="lbl"><b>Hear the records</b>From Judas Priest to now</span>
+    <span class="vinyl-wrap" aria-hidden="true"><span class="vinyl" id="vinyl"><i>Al Atkins</i></span><span class="vinyl-sheen"></span></span>
+    <span class="sr-only">Hear the records</span>
+  </a>
+  <div class="reel" id="reel" aria-hidden="true"><div class="reel-stack" id="reelStack"></div><div class="reel-meta"><p class="reel-year" id="reelYear"></p><p class="reel-cap" id="reelCap"></p></div></div>
+  <button class="reel-skip" id="reelSkip" type="button">Skip intro</button>
+</section>
+
+<!-- ── Story ── -->
+<section class="section" id="story">
+  <div class="wrap story-grid">
+    <figure class="story-photo photo rise">
+      <img src="images/web/portrait-bw-leather-jacket-2010s.jpg" alt="Al Atkins in a black leather jacket and sunglasses, black and white portrait" width="1359" height="1359" loading="lazy">
+    </figure>
+    <div class="story-text prose">
+      <h2 class="h2 rise">He was there first</h2>
+      <p class="lede rise">In 1969, in the Black Country, Al Atkins and his old friend Bruno Stapenhill formed a heavy band. Bruno suggested a name from a Bob Dylan song: Judas Priest.</p>
+      <div class="rise">
+        <p>Al sang and wrote the songs. When the first line-up fell apart, he joined K.K. Downing, Ian Hill and John Ellis, three musicians rehearsing without a singer, and brought the name with him. In 1972 alone they played more than 150 gigs, opening for Thin Lizzy and Status Quo.</p>
+        <p>In May 1973, with a young family to support and still no record deal, he stepped away. He let Downing and Hill keep the name and the songs he had written with them. Those songs ended up on Priest's first two albums, <em>Victim of Changes</em> among them.</p>
+        <p>Then he kept going: Lion through the seventies, his own studio in the eighties, solo albums from 1990, Holy Rage, five records with guitarist Paul May, and <em>Reloaded</em> with Ian Hill, Roy Z and Ralf Scheepers. More than sixty years after he first sat behind a drum kit, he is still making records.</p>
+      </div>
+      <figure class="pull rise">
+        <blockquote>“I left Judas Priest in 1973 but gave the band permission to use the name and the songs I had written with them.”</blockquote>
+        <figcaption>Al Atkins, speaking to Power of Metal in 2012</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── Timeline ── -->
+<section class="section" id="timeline">
+  <div class="wrap">
+    <h2 class="h2 rise">Sixty years in heavy music</h2>
+    <p class="lede rise">From a West Bromwich drum kit to Judas Priest, Lion, the solo years and the records still coming out today.</p>
+
+    <div class="tl">
+    <div class="tl-spine" aria-hidden="true"><div class="tl-fill"></div></div>
+    <ol class="tl-list" role="list">
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1947<span class="hot">1947</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1947: </span>Born in the Black Country</h3>
+          <p>Alan John Atkins is born on 14 October in West Bromwich, a town of foundries and factories at the industrial heart of England. Heavy rock would grow out of this same corner of the Midlands.</p>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1963<span class="hot">1963</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1963: </span>Behind the drum kit</h3>
+          <p>Pulled in by the beat boom, and with a drum kit his father bought him, he starts out as a drummer who sings. His first band, The Medallions, includes school friend Bruno Stapenhill. They wear matching grey trousers and blue jackets and play pubs, weddings and clubs. Next comes The Reaction, a trio playing Small Faces and Who songs.</p>
+          <div class="era-photos" style="--n:1;--ar:865/420">
+            <figure><div class="photo treated"><img src="images/web/1960s-the-medallions.jpg" alt="The Medallions on stage in the early 1960s, the band name on the bass drum" width="865" height="420" loading="lazy"></div><figcaption>The Medallions, Al's first band</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1965<span class="hot">1965</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1965: </span>Out front</h3>
+          <p>In The Bitta Sweet he gives up the drums to front the band. They open for Davy Jones and the Lower Third, soon to become David Bowie's band, plus Long John Baldry, Cat Stevens and Steampacket with Rod Stewart. They share bills with Robert Plant's Band of Joy. Al gets to know Plant while working at a garage, and the two jam blues together, Plant on guitar and Al on harmonica. Al writes his first song, “Sugar Tree Park”.</p>
+          <div class="era-photos" style="--n:1;--ar:915/635">
+            <figure><div class="photo treated"><img src="images/web/1965-the-bitta-sweet.jpg" alt="The Bitta Sweet, a four-piece group, black and white, 1965" width="915" height="635" loading="lazy"></div><figcaption>The Bitta Sweet in 1965</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1967<span class="hot">1967</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1967: </span>Getting heavier</h3>
+          <p>Sugar Stack, Blue Condition, then the Jug Blues Band, each one heavier than the last. His final gig with Jug is at Wolverhampton Civic Hall, on a bill with Spooky Tooth and Slade. He walks away from a three-month tour of Morocco with Evolution when he learns he'd be driving the bus.</p>
+          <div class="era-photos" style="--cols:minmax(0,1.811fr) minmax(0,.843fr)">
+            <figure><div class="photo treated" style="--ar:1371/757"><img src="images/web/1967-sugarstack.jpg" alt="Sugarstack, a five-piece band, black and white, 1967" width="1371" height="757" loading="lazy"></div><figcaption>Sugarstack in 1967</figcaption></figure>
+            <figure><div class="photo treated" style="--ar:1349/1600"><img src="images/web/1968-jug-blues-band.jpg" alt="The Jug Blues Band, five-piece studio promo shot, 1968" width="1349" height="1600" loading="lazy"></div><figcaption>The Jug Blues Band in 1968</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1969<span class="hot">1969</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1969: </span>Judas Priest</h3>
+          <p>Al and Bruno form a heavy band with drummer John Partridge and guitarist John Perry. Perry dies at 18 before the band gets going, and 17-year-old Ernie Chataway takes his place. Bruno suggests the name, from Dylan's “The Ballad of Frankie Lee and Judas Priest”.</p>
+          <p>A showcase at the George Hotel in Walsall wins them a deal with Immediate Records. Their demo is two of Al's songs, “Good Time Woman” and “We'll Stay Together”.</p>
+          <ul class="facts" aria-label="1969 line-up">
+            <li>Al Atkins, vocals</li><li>Bruno Stapenhill, bass</li><li>Ernie Chataway, guitar</li><li>John Partridge, drums</li>
+          </ul>
+          <div class="era-photos" style="--n:1;--ar:1098/1548;max-width:420px">
+            <figure><div class="photo treated"><img src="images/web/priest-1969-lineup.jpg" alt="Newspaper clipping of the first Judas Priest line-up, with the band name printed underneath" width="1098" height="1548" loading="lazy"></div><figcaption>The first Judas Priest, in a 1969 newspaper clipping</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1970<span class="hot">1970</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1970: </span>A new band, the same name</h3>
+          <p>Immediate goes out of business before anything is recorded. On a tour of Scotland the drummer drops out and Al drums and sings in a three-piece. A night-time snowstorm on a Scottish mountain later becomes the song “Winter”. By the middle of the year the band has split.</p>
+          <p>That autumn, at Holy Joe's rehearsal rooms in Wednesbury, Al hears K.K. Downing, Ian Hill and John Ellis playing without a singer. They are about to call themselves Freight. Al joins and suggests his old band's name instead. The new Judas Priest plays its first gig on 6 March 1971, shares a bill with Black Sabbath at the Masonic Hall in Walsall on 26 May, and that July records two of Al's songs, “Mind Conception” and “Holy Is the Man”.</p>
+          <ul class="facts" aria-label="1971 line-up">
+            <li>Al Atkins, vocals</li><li>K.K. Downing, guitar</li><li>Ian Hill, bass</li><li>John Ellis, drums</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1972<span class="hot">1972</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1972: </span>On the road</h3>
+          <p>Signed to IMA, the management agency run with Black Sabbath's Tony Iommi, Priest play more than 150 gigs in a year. They open for Status Quo, Thin Lizzy, UFO, Family, Supertramp and Budgie. The set runs “Spanish Castle Magic”, “Winter”, “Holy Is the Man”, “Never Satisfied” and the long closer “Caviar and Meths”. Chris “Congo” Campbell is on drums.</p>
+          <div class="era-photos" style="--cols:minmax(0,1.333fr) minmax(0,1.13fr)">
+            <figure><div class="photo treated" style="--ar:1600/1200"><img src="images/web/priest-c1972-73-drumkit-collage.jpg" alt="Three black and white shots of Judas Priest posed around a bass drum with the band's name" width="1600" height="1200" loading="lazy"></div><figcaption>Judas Priest around 1972</figcaption></figure>
+            <figure><div class="photo treated" style="--ar:834/738"><img src="images/web/priest-1973-stonehenge.jpg" alt="Four members of Judas Priest by the roadside at Stonehenge, colour photo" width="834" height="738" loading="lazy"></div><figcaption>At Stonehenge in 1973</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1973<span class="hot">1973</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1973: </span>Passing it on</h3>
+          <p>His last gig with the band is opening for Budgie at St George's Hall in Liverpool. In May, with no record deal, and as the only member married with a child to support, Al leaves and takes a job at the Post Office garage in Sutton Coldfield.</p>
+          <p>A few months later Downing and Hill come to his door and ask to keep the name and the songs. He says yes. Rob Halford joins, and Al's songs go on to Priest's first two albums.</p>
+          <div class="era-photos" style="--n:1;--ar:1083/1600;max-width:420px">
+            <figure><div class="photo treated"><img src="judas-priest-1973.jpg" alt="Judas Priest in 1973, four young men with long hair on stone steps" width="1083" height="1600" loading="lazy"></div><figcaption>Judas Priest in 1973</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1974<span class="hot">1974</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1974: </span>Lion</h3>
+          <p>Within months he's singing again, in Bruno Stapenhill's new band, which Al names Lion. They start out playing jazz-rock and get heavier. They record at Pelsall in 1975 and, in the punk years, open for the Sex Pistols at Barbarella's in Birmingham, and for The Stranglers. Lion run until about 1978.</p>
+          <p>Meanwhile his songs reach the world. <em>Rocka Rolla</em> (1974) carries “Winter”, “Never Satisfied” and “Caviar and Meths”. <em>Sad Wings of Destiny</em> (1976) carries “Victim of Changes” and “Dreamer Deceiver”. <a class="text-link" href="#songs">See the songs</a></p>
+          <ul class="facts" aria-label="Lion line-up">
+            <li>Al Atkins, vocals</li><li>Bruno Stapenhill, bass</li><li>Harry Tonks, guitar</li><li>Jim Perry, then Pete Boot, drums</li>
+          </ul>
+          <div class="era-photos" style="--n:1;--ar:1600/1302">
+            <figure><div class="photo treated"><img src="images/web/lion-1970s-band.jpg" alt="Lion's black and white promo print: four band members with the word Lion and the agency address" width="1600" height="1302" loading="lazy"></div><figcaption>Lion's 1970s promo print, from the Fewtrell Tully agency in Birmingham</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1988<span class="hot">1988</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1988: </span>The studio years</h3>
+          <p>Through the eighties he builds his own studio and produces young Birmingham bands. In 1988 he forms a new band and starts writing again, with Bruno and with guitarist Paul May, who has played on every Al Atkins album since. That year he's filmed recording his own version of “Victim of Changes”.</p>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">1990<span class="hot">1990</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">1990: </span>Solo</h3>
+          <p><em>Judgement Day</em> opens a run of solo records. <em>Dreams of Avalon</em> follows, then <em>Heavy Thoughts</em> (1994) for Gull, Priest's first label, with the full-length “Caviar and Meths”. On <em>Victim of Changes</em> (1998) he re-records the early Priest songs with former Priest drummer Dave Holland.</p>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">2007<span class="hot">2007</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">2007: </span>Demon Deceiver, a book and Holy Rage</h3>
+          <p><em>Demon Deceiver</em> brings in Budgie's Simon Lees, with guests including Diamond Head's Brian Tatler and Bernie Tormé. In 2009 he publishes his autobiography, <em>Dawn of the Metal Gods</em>, written with Neil Daniels with a foreword by Ian Hill and recollections from Bruno Stapenhill, Ernie Chataway and John Ellis, and launches it on BBC radio. His band becomes Holy Rage, who share a bill with former Rainbow singer Graham Bonnet in California and release their album in 2010.</p>
+          <div class="era-photos" style="--n:2;--ar:2/3;max-width:640px">
+            <figure><div class="photo"><img src="images/web/live-holy-rage-arms-raised-c2011.jpg" alt="Al Atkins on stage under red light, arms raised, the Holy Rage bass drum behind him" width="498" height="750" loading="lazy"></div><figcaption>With Holy Rage</figcaption></figure>
+            <figure><div class="photo"><img src="images/web/live-silhouette-blue-smoke-c2011.jpg" alt="Al Atkins silhouetted against blue stage smoke and lights" width="426" height="640" loading="lazy"></div><figcaption>On stage, around 2011</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">2011<span class="hot">2011</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">2011: </span>The Atkins/May Project</h3>
+          <p>Paul May asks him to sing on two tracks of a solo album. Al sings the lot. As the Atkins/May Project they release <em>Serpents Kiss</em> (2011), <em>Valley of Shadows</em> (2012), <em>Empire of Destruction</em> (2014), <em>Anthology</em> (2015) and <em>The Final Cut</em> (2020).</p>
+          <div class="era-photos" style="--n:1;--ar:638/432;max-width:560px">
+            <figure><div class="photo"><img src="images/web/atkins-may-project-duo-2020.jpg" alt="Paul May and Al Atkins in an Atkins/May Project promo photo" width="638" height="432" loading="lazy"></div><figcaption>Paul May and Al Atkins</figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">2017<span class="hot">2017</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">2017: </span>Reloaded</h3>
+          <p>His own songs, reclaimed. “Victim of Changes” becomes a duet with Primal Fear's Ralf Scheepers. Ian Hill plays bass on “Winter” and “Never Satisfied”, with Roy Z, John McCoy, Stu Marshall and others. The album closes with an extract from an early Priest demo with Downing and Hill.</p>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">2024<span class="hot">2024</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">2024: </span>Back on vinyl</h3>
+          <p>Ancient Grease Records starts releasing his 1970s recordings with Lion's “Rain” and “All That I Want”, recorded in 1975. Sleaszy Rider reissues <em>Reloaded</em> and <em>Serpents Kiss</em>. Judas Priest's 50th-anniversary <em>Rocka Rolla</em> puts his three co-writes back in the shops.</p>
+        </div>
+      </li>
+
+      <li class="era">
+        <div class="era-year" aria-hidden="true">2026<span class="hot">2026</span></div>
+        <div class="era-node" aria-hidden="true"></div>
+        <div class="era-body">
+          <h3 class="era-title"><span class="sr-only">2026: </span>The first Priest recording, found</h3>
+          <p>The 1971 demos of “Mind Conception” and “Holy Is the Man” resurface and are written up as the earliest known Judas Priest recording, with Al on vocals.</p>
+        </div>
+      </li>
+    </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ── Songs ── -->
+<section class="section" id="songs">
+  <div class="wrap">
+    <h2 class="h2 rise">The songs</h2>
+    <p class="lede rise">Five songs on Judas Priest's first two albums carry his name.</p>
+    <ol class="songs" role="list">
+      <li class="song rise">
+        <span class="song-name">Victim of Changes<span class="hot" aria-hidden="true">Victim of Changes</span></span>
+        <span class="song-meta"><strong>Sad Wings of Destiny, 1976</strong>Atkins, Tipton, Halford, Downing. Built from Al's “Whiskey Woman” and Halford's “Red Light Lady”.</span>
+      </li>
+      <li class="song rise">
+        <span class="song-name">Winter<span class="hot" aria-hidden="true">Winter</span></span>
+        <span class="song-meta"><strong>Rocka Rolla, 1974</strong>Atkins, Downing, Hill. Inspired by a snowstorm on a Scottish mountain during the 1970 tour.</span>
+      </li>
+      <li class="song rise">
+        <span class="song-name">Never Satisfied<span class="hot" aria-hidden="true">Never Satisfied</span></span>
+        <span class="song-meta"><strong>Rocka Rolla, 1974</strong>Atkins, Downing. Written in 1972 for the live set.</span>
+      </li>
+      <li class="song rise">
+        <span class="song-name">Caviar and Meths<span class="hot" aria-hidden="true">Caviar and Meths</span></span>
+        <span class="song-meta"><strong>Rocka Rolla, 1974</strong>Atkins, Downing, Hill. The early set's long closer. Only its intro made the album; Al recorded it in full on <em>Heavy Thoughts</em>.</span>
+      </li>
+      <li class="song rise">
+        <span class="song-name">Dreamer Deceiver<span class="hot" aria-hidden="true">Dreamer Deceiver</span></span>
+        <span class="song-meta"><strong>Sad Wings of Destiny, 1976</strong>Halford, Downing, Tipton, Atkins.</span>
+      </li>
+    </ol>
+    <figure class="pull rise">
+      <blockquote>“It has to be ‘Victim of Changes’ which I'm most proud of.”</blockquote>
+      <figcaption>Al Atkins, speaking to It's Psychedelic Baby Magazine in 2022</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ── Records ── -->
+<section class="section" id="records">
+  <div class="wrap">
+    <h2 class="h2 rise">The records</h2>
+    <p class="lede rise">Every album he has made or written for, from Judas Priest's first two to the Lion single that came out fifty years after it was recorded.</p>
+
+    <div class="shelf-head"><h3>With Judas Priest</h3><p>As songwriter</p></div>
+    <ul class="shelf" role="list">
+      <li class="record"><div class="record-art"><img src="images/web/cover-rocka-rolla-1974.jpg" alt="Rocka Rolla album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Rocka Rolla</p><p class="record-meta">1974, Gull</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-sad-wings-of-destiny-1976.jpg" alt="Sad Wings of Destiny album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Sad Wings of Destiny</p><p class="record-meta">1976, Gull</p></li>
+    </ul>
+
+    <div class="shelf-head"><h3>Solo</h3><p>Al Atkins</p></div>
+    <ul class="shelf" role="list">
+      <li class="record"><div class="record-art"><img src="images/web/cover-judgement-day-1990.jpg" alt="Judgement Day album cover" width="599" height="525" loading="lazy"></div><p class="record-title">Judgement Day</p><p class="record-meta">1990</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-dreams-of-avalon-1991.jpg" alt="Dreams of Avalon album cover, a drawn portrait of Al with a guitar" width="709" height="709" loading="lazy"></div><p class="record-title">Dreams of Avalon</p><p class="record-meta">1991</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-heavy-thoughts-2003.jpg" alt="Heavy Thoughts album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Heavy Thoughts</p><p class="record-meta">1994, Gull</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-victim-of-changes-1998.jpg" alt="Victim of Changes album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Victim of Changes</p><p class="record-meta">1998, with Dave Holland</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-demon-deceiver-2009.jpg" alt="Demon Deceiver album cover" width="599" height="585" loading="lazy"></div><p class="record-title">Demon Deceiver</p><p class="record-meta">2007</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-reloaded-2017.jpg" alt="Reloaded album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Reloaded</p><p class="record-meta">2017, with Ian Hill, Roy Z and Ralf Scheepers</p></li>
+    </ul>
+
+    <div class="shelf-head"><h3>Bands and projects</h3><p>Holy Rage, the Atkins/May Project and Lion</p></div>
+    <ul class="shelf" role="list">
+      <li class="record"><div class="record-art"><img src="images/web/cover-holy-rage-2010.jpg" alt="Holy Rage album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Holy Rage</p><p class="record-meta">2010, Holy Rage</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-amp-serpents-kiss-2011.jpg" alt="Serpents Kiss album cover" width="888" height="900" loading="lazy"></div><p class="record-title">Serpents Kiss</p><p class="record-meta">2011, Atkins/May Project</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-amp-valley-of-shadows-2012.jpg" alt="Valley of Shadows album cover" width="475" height="475" loading="lazy"></div><p class="record-title">Valley of Shadows</p><p class="record-meta">2012, Atkins/May Project</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-amp-empire-of-destruction.jpg" alt="Empire of Destruction album cover" width="900" height="900" loading="lazy"></div><p class="record-title">Empire of Destruction</p><p class="record-meta">2014, Atkins/May Project</p></li>
+      <li class="record"><div class="record-art blank" aria-hidden="true"><span>Anthology</span></div><p class="record-title">Anthology</p><p class="record-meta">2015, Atkins/May Project</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-amp-the-final-cut.jpg" alt="The Final Cut album cover" width="900" height="900" loading="lazy"></div><p class="record-title">The Final Cut</p><p class="record-meta">2020, Atkins/May Project</p></li>
+      <li class="record"><div class="record-art"><img src="images/web/cover-lion-rain-single-2024.jpg" alt="Lion, Rain seven-inch single sleeve" width="850" height="661" loading="lazy"></div><p class="record-title">Rain / All That I Want</p><p class="record-meta">2024, Lion, recorded 1975</p></li>
+    </ul>
+
+    <div class="shelf-head"><h3>The book</h3><p>Autobiography</p></div>
+    <ul class="shelf" role="list">
+      <li class="record"><div class="record-art blank" aria-hidden="true"><span>Dawn of the Metal Gods</span></div><p class="record-title">Dawn of the Metal Gods</p><p class="record-meta">2009, Iron Pages. With Neil Daniels, foreword by Ian Hill</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Now ── -->
+<section class="section" id="now">
+  <div class="wrap now-grid">
+    <figure class="now-photo photo rise" style="aspect-ratio:3/4">
+      <img src="lion-record.jpg" alt="The Lion seven-inch single from Ancient Grease Records, with its picture sleeve and insert" width="1536" height="2048" loading="lazy">
+    </figure>
+    <div class="now-text prose">
+      <h2 class="h2 rise">Still loud</h2>
+      <p class="lede rise">Fifty years after Lion recorded them in Pelsall, “Rain” and “All That I Want” are out on seven-inch vinyl.</p>
+      <div class="rise">
+        <p>Ancient Grease Records, a US label that digs up lost hard rock, now looks after Al's 1970s recordings. The Lion single comes in a picture sleeve, with a lenticular edition of 50, and there is more unreleased material to come.</p>
+        <figure class="pull">
+          <blockquote>“I still like my music loud and heavy.”</blockquote>
+          <figcaption>Al Atkins, speaking to MHF Magazine in 2016</figcaption>
+        </figure>
+        <div class="link-row">
+          <a class="btn btn-hot" href="https://www.ancientgreaserecords.com/" target="_blank" rel="noopener">Ancient Grease Records</a>
+          <a class="btn btn-steel" href="https://sleaszyrider.com/" target="_blank" rel="noopener">Sleaszy Rider Records</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Follow ── -->
+<section class="section" id="follow">
+  <div class="wrap">
+    <h2 class="h2 rise">Follow Al</h2>
+    <p class="lede rise">News, old photos and new music, straight from him.</p>
+    <ul class="follow-list" role="list">
+      <li><a class="follow-card" href="https://www.instagram.com/alatkins_/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        <strong>Instagram</strong><span>@alatkins_</span></a></li>
+      <li><a class="follow-card" href="https://www.facebook.com/allan.atkins.7" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg>
+        <strong>Facebook</strong><span>Allan Atkins</span></a></li>
+      <li><a class="follow-card" href="https://x.com/REALAlAtkins" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg>
+        <strong>X</strong><span>@REALAlAtkins</span></a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer-mark" aria-hidden="true">Al Atkins</p>
+    <p>Archive photographs from Al Atkins' own collection, as published in interviews. Lion sleeve photography courtesy of Ancient Grease Records. Album artwork belongs to the labels and artists who released it.</p>
+    <p>Facts on this page come from interviews with Al and from published sources, including <a href="https://www.psychedelicbabymag.com/2022/05/judas-priest-interview-al-atkins.html" target="_blank" rel="noopener">It's Psychedelic Baby</a>, <a href="http://www.brumbeat.net/judaspri.htm" target="_blank" rel="noopener">Brumbeat</a> and <a href="https://blabbermouth.net/" target="_blank" rel="noopener">Blabbermouth</a>.</p>
+  </div>
+</footer>
+
+<script type="module">
+import { NOISE, CHROME, createGL, buildMask, uploadMask, sizeCanvases, placeCopy, shake, loop } from './js/hero-kit.js';
+
+const FRAG = `precision highp float;
+varying vec2 vUv;
+uniform vec2 uRes, uTilt, uAim; uniform float uTime, uSpot, uBeams, uChord, uFlash, uRigY;
+uniform vec4 uBox; uniform sampler2D uMask;
+${NOISE}
+${CHROME}
+float cone(vec2 p, vec2 o, vec2 d, float spread){
+  vec2 v=p-o; float al=dot(v,d); if(al<0.) return 0.;
+  float perp=length(v-d*al); float w=.006+al*spread;
+  return (1.-smoothstep(w*.3,w,perp))*exp(-al*.5);
+}
+void main(){
+  vec2 uv=vUv; float asp=uRes.x/uRes.y; vec2 q=vec2(uv.x*asp,uv.y); float t=uTime;
+  float haze=fbm(q*1.4+vec2(t*.012,-t*.02)+fbm(q*.7-t*.008));
+  float hz=.2+haze*1.35;
+  vec3 col=vec3(.008,.008,.011)+vec3(.03,.03,.04)*haze;
+
+  // follow-spot from the front of house, on the name
+  vec2 aim=vec2(uAim.x*asp,uAim.y);
+  vec2 so=vec2(.5*asp,1.12);
+  vec3 light=vec3(1.,.97,.92)*cone(q,so,normalize(aim-so),.11)*uSpot*1.3;
+
+  // six moving heads hanging off the rig: slow drift, swung onto the name for the hit
+  for(int i=0;i<6;i++){
+    float fi=float(i);
+    float fx=fi<3.? .07+fi*.155 : .62+(fi-3.)*.155;
+    vec2 o=vec2(fx*asp,uRigY);
+    float side=fx<.5?1.:-1.;
+    float a=side*.12+sin(t*(.55+fi*.06)+fi*1.7)*.42+sin(t*(.21+fi*.04)+fi*.6)*.14;
+    vec2 dSweep=vec2(sin(a),-cos(a));
+    vec2 d=normalize(mix(dSweep,normalize(aim-o),uChord));
+    vec3 c=(i==1||i==4)?vec3(1.,.13,.09):(i==2||i==3)?vec3(1.,.93,.85):vec3(.62,.74,1.);
+    c=mix(c,vec3(1.,.95,.95),uChord*.45);
+    light+=c*cone(q,o,d,.075)*uBeams*.9;
+  }
+  col+=light*hz;
+
+  // stage fog rolling along the floor, lit by whatever beam lands in it
+  float fogMask=1.-smoothstep(0.,.34,uv.y);
+  float fog=fbm(vec2(q.x*1.3+t*.035,uv.y*4.-t*.012)+fbm(q*1.8-t*.02))*fogMask;
+  col+=vec3(.55,.6,.72)*fog*(.05+dot(light,vec3(.33))*.85);
+  col+=vec3(1.)*uFlash*.2;
+
+  vec2 pc=(uv-vec2(.5,.68))*vec2(asp*.9,1.);
+  float bgA=clamp(.94-.55*exp(-dot(pc,pc)*5.)*(.4+uSpot*.6),0.,1.);
+
+  // dark, satin chrome, lit by whatever beam crosses it
+  float cov; vec3 n;
+  vec3 ch=chrome(uv,uTilt,3.4,vec3(.3,.34,.42),vec3(.74,.78,.86),vec3(.09,.08,.08),cov,n);
+  ch*=.35+uSpot*.75+uChord*.4;
+  ch+=light*.5+vec3(1.)*uFlash*.45;
+  cov*=smoothstep(0.,.35,uSpot);
+
+  col=mix(col*bgA,ch,cov);
+  gl_FragColor=vec4(col,mix(bgA,1.,cov));
+}`;
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hero = document.getElementById('hero'), glc = document.getElementById('gl'), fx = document.getElementById('fx');
+const copy = document.getElementById('copy'), portrait = document.getElementById('portrait'), shakeEl = document.getElementById('shake');
+const ready = () => hero.classList.add('is-ready');
+
+await document.fonts.load('900 100px "Grenze Gotisch"'); await document.fonts.ready;
+const G = createGL(glc, FRAG);
+if (!G){ document.querySelector('.hero h1').classList.remove('sr-only'); ready(); throw new Error('WebGL unavailable'); }
+const { gl, U, tex } = G;
+const mask = document.createElement('canvas'), ctx = fx.getContext('2d');
+const stageC = document.createElement('canvas'), sctx = stageC.getContext('2d');
+let W, H, dpr, L, rect, aim = [.5, .5], rows = [], floorY = 0, rigY = 0, edges = [], heads = [], jets = [];
+const FIX_X = [.07, .225, .38, .62, .775, .93];
+const FIX_C = ['150,175,255', '255,45,30', '255,238,215', '255,238,215', '255,45,30', '150,175,255'];
+
+function layout(){
+  if (!hero.getBoundingClientRect().width) return;   // hidden or not laid out yet: keep the last layout
+  ({ W, H, dpr, rect } = sizeCanvases(hero, [glc, fx])); gl.viewport(0, 0, W, H);
+  L = buildMask(mask, W, H, dpr, { centerY: .42 }); uploadMask(gl, tex, mask); placeCopy(copy, L.ink, rect);
+  aim = [.5, L.box[1] + L.box[3] * .5];
+  floorY = H - 116 * dpr;
+  rigY = Math.max(64 * dpr, H * .09);
+  makeStage(); makeCrowd();
+}
+
+/* ── the stage: lighting rig, truss towers, amp stacks, monitor wedges. Drawn once; it's scenery ── */
+function truss(x0, y0, x1, y1, th){
+  const horiz = Math.abs(x1 - x0) > Math.abs(y1 - y0);
+  sctx.strokeStyle = '#17181d'; sctx.lineWidth = Math.max(1.5, 2 * dpr);
+  sctx.beginPath();
+  if (horiz){ sctx.moveTo(x0, y0); sctx.lineTo(x1, y0); sctx.moveTo(x0, y0 + th); sctx.lineTo(x1, y0 + th); }
+  else { sctx.moveTo(x0, y0); sctx.lineTo(x0, y1); sctx.moveTo(x0 + th, y0); sctx.lineTo(x0 + th, y1); }
+  sctx.stroke();
+  sctx.lineWidth = Math.max(1, dpr); sctx.beginPath();
+  const len = horiz ? x1 - x0 : y1 - y0;
+  for (let s = 0, k = 0; s < len; s += th, k++){
+    if (horiz){ sctx.moveTo(x0 + s, k % 2 ? y0 : y0 + th); sctx.lineTo(x0 + s + th, k % 2 ? y0 + th : y0); }
+    else { sctx.moveTo(k % 2 ? x0 : x0 + th, y0 + s); sctx.lineTo(k % 2 ? x0 + th : x0, y0 + s + th); }
+  }
+  sctx.stroke();
+}
+function cab(x, y, w, h){
+  sctx.fillStyle = '#060607'; sctx.fillRect(x, y, w, h);
+  sctx.fillStyle = '#0a0a0d'; sctx.fillRect(x + w * .06, y + h * .08, w * .88, h * .84);
+  sctx.strokeStyle = 'rgba(255,255,255,.04)'; sctx.lineWidth = Math.max(1, dpr);
+  for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++){
+    sctx.beginPath(); sctx.arc(x + w * (.29 + i * .42), y + h * (.3 + j * .4), Math.min(w, h) * .17, 0, 6.283); sctx.stroke();
+  }
+  sctx.fillStyle = '#1f2026'; const c = Math.max(3 * dpr, w * .05);
+  [[x, y], [x + w - c, y], [x, y + h - c], [x + w - c, y + h - c]].forEach(([a, b]) => sctx.fillRect(a, b, c, c));
+  edges.push([x, y, w]);
+}
+function makeStage(){
+  stageC.width = W; stageC.height = H; sctx.clearRect(0, 0, W, H); edges = []; heads = [];
+  const th = 14 * dpr;
+  // truss towers either side, and the rig across the top
+  truss(W * .004, rigY, W * .004, floorY, th); truss(W - W * .004 - th, rigY, W - W * .004 - th, floorY, th);
+  truss(0, rigY, W, rigY, th);
+  // moving-head fixtures hanging under the rig
+  for (const f of FIX_X){
+    const x = f * W, w = 16 * dpr, h = 13 * dpr, y = rigY + th;
+    sctx.fillStyle = '#121318'; sctx.fillRect(x - 2 * dpr, y, 4 * dpr, 5 * dpr);
+    sctx.beginPath(); sctx.roundRect(x - w / 2, y + 4 * dpr, w, h, 4 * dpr); sctx.fill();
+    heads.push([x, y + 4 * dpr + h]);
+  }
+  // amp stacks: two cabinets and a head, with a red power light
+  const n = W / dpr > 1100 ? 3 : W / dpr > 760 ? 2 : 1;
+  const cw = Math.min(H * .135, W * (n > 1 ? .075 : .13)), chh = cw * .78, hh = chh * .42, gap = cw * .07;
+  const inset = W * .004 + th + 6 * dpr;
+  for (let s = 0; s < 2; s++) for (let i = 0; i < n; i++){
+    const x = s === 0 ? inset + i * (cw + gap) : W - inset - cw - i * (cw + gap);
+    const top = floorY - chh * 2 - hh;
+    cab(x, floorY - chh, cw, chh); cab(x, floorY - chh * 2, cw, chh);
+    sctx.fillStyle = '#060607'; sctx.fillRect(x, top, cw, hh);
+    sctx.fillStyle = '#141418'; sctx.fillRect(x + cw * .06, top + hh * .55, cw * .88, hh * .28);
+    sctx.fillStyle = '#34343b';
+    for (let k = 0; k < 5; k++){ sctx.beginPath(); sctx.arc(x + cw * (.34 + k * .12), top + hh * .69, Math.max(1.2 * dpr, hh * .07), 0, 6.283); sctx.fill(); }
+    const lx = x + cw * .16, ly = top + hh * .69;
+    const g = sctx.createRadialGradient(lx, ly, 0, lx, ly, hh * .9);
+    g.addColorStop(0, 'rgba(255,45,30,.4)'); g.addColorStop(1, 'rgba(255,45,30,0)');
+    sctx.fillStyle = g; sctx.fillRect(lx - hh, ly - hh, hh * 2, hh * 2);
+    sctx.fillStyle = 'rgba(255,80,60,.9)'; sctx.beginPath(); sctx.arc(lx, ly, Math.max(1.4 * dpr, hh * .075), 0, 6.283); sctx.fill();
+    edges.push([x, top, cw]);
+  }
+  // CO2 jets sit just inside the amps
+  const jx = inset + n * (cw + gap) + 14 * dpr;
+  jets = [jx, W - jx];
+  // monitor wedges along the front of the stage
+  for (const f of [.3, .42, .58, .7]){
+    const x = f * W, w = 46 * dpr, h = 15 * dpr;
+    sctx.fillStyle = '#070709';
+    sctx.beginPath(); sctx.moveTo(x - w / 2, floorY); sctx.lineTo(x - w / 2 + 6 * dpr, floorY - h); sctx.lineTo(x + w / 2 - 6 * dpr, floorY - h); sctx.lineTo(x + w / 2, floorY); sctx.closePath(); sctx.fill();
+    edges.push([x - w / 2 + 6 * dpr, floorY - h, w - 12 * dpr]);
+  }
+}
+
+/* ── the crowd: three rows deep ── */
+const INK = '#020203';
+function makeCrowd(){
+  rows = [];
+  const defs = [{ y: H - 60 * dpr, r: 13, gap: 22 }, { y: H - 30 * dpr, r: 17, gap: 28 }, { y: H + 8 * dpr, r: 23, gap: 38 }];
+  defs.forEach((d, ri) => {
+    const row = [];
+    for (let x = -20; x < W / dpr + 20; x += d.gap * (.72 + Math.random() * .5)){
+      const px = x * dpr;
+      const k = Math.random();
+      row.push({ x: px, y: d.y, r: d.r * (.85 + Math.random() * .35) * dpr,
+        kind: k < .3 ? 'jump' : k < .58 ? 'bang' : k < .74 ? 'fist' : k < .92 ? 'horns' : 'sway',
+        arm: Math.random() < .5 ? (Math.random() < .6 ? 'horns' : 'fist') : null,
+        hair: Math.random() < .6, hairLen: .9 + Math.random() * .8, side: Math.random() < .5 ? -1 : 1,
+        reach: .8 + Math.random() * .45, off: (Math.random() - .5) * .16, delay: Math.random() * .35, jump: .7 + Math.random() * .6, ph: Math.random() * 6.28 });
+    }
+    rows.push(row);
+  });
+}
+function hand(hx, hy, r, horns){
+  ctx.beginPath(); ctx.arc(hx, hy - r * .2, r * .42, 0, 6.283); ctx.fill();
+  if (!horns) return;
+  ctx.lineWidth = r * .2;
+  ctx.beginPath(); ctx.moveTo(hx - r * .25, hy - r * .4); ctx.lineTo(hx - r * .42, hy - r * 1.3);
+  ctx.moveTo(hx + r * .25, hy - r * .4); ctx.lineTo(hx + r * .42, hy - r * 1.25); ctx.stroke();
+}
+/* x,y: feet line; bang: 0..1 head dip (hair flies up); arm: 0..1 raised; armKind: 'horns'|'fist'|null */
+function person(x, y, r, bang, arm, armKind, side, reach, hair, hairLen, rim, sway){
+  const shY = y - r * 1.2;
+  const hx = x + sway * r * .12, hy = shY - r * 1.15 + bang * r * .55;
+  ctx.fillStyle = INK; ctx.strokeStyle = INK; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x - r * 1.6, y + r * 2.2); ctx.quadraticCurveTo(x - r * 1.7, shY, x - r * .5, shY - r * .25);
+  ctx.lineTo(x + r * .5, shY - r * .25); ctx.quadraticCurveTo(x + r * 1.7, shY, x + r * 1.6, y + r * 2.2); ctx.closePath(); ctx.fill();
+  if (hair){
+    // long hair hangs to the shoulders; as the head goes down it whips up and out
+    const w = r * (.98 + bang * .7), tip = hy + r * hairLen * (1 - bang * 1.9);
+    ctx.beginPath(); ctx.moveTo(hx - r * .75, hy - r * .1);
+    ctx.quadraticCurveTo(hx - w * 1.25, (hy + tip) / 2, hx - w * .8 + sway * r * .3, tip);
+    ctx.lineTo(hx + w * .8 + sway * r * .3, tip);
+    ctx.quadraticCurveTo(hx + w * 1.25, (hy + tip) / 2, hx + r * .75, hy - r * .1); ctx.closePath(); ctx.fill();
+  }
+  if (rim > 0){ ctx.fillStyle = `rgba(190,205,255,${rim})`; ctx.beginPath(); ctx.arc(hx, hy - 1.2 * dpr, r * .78, 0, 6.283); ctx.fill(); ctx.fillStyle = INK; }
+  ctx.beginPath(); ctx.arc(hx, hy, r * .78, 0, 6.283); ctx.fill();
+  if (armKind && arm > .01){
+    const sx = x + side * r * 1.1, ex = sx + side * r * .5, ey = shY - r * .2 - r * 3.3 * reach * arm;
+    ctx.lineWidth = r * .62; ctx.beginPath(); ctx.moveTo(sx, shY); ctx.lineTo(ex, ey); ctx.stroke();
+    hand(ex, ey, r, armKind === 'horns');
+  }
+}
+
+
+/* ── the career reel ── */
+const IMG = 'images/web/';
+const REEL_ITEMS = [
+  ['1960s-the-medallions.jpg', '1963', 'The Medallions, his first band', 1],
+  ['1965-the-bitta-sweet.jpg', '1965', 'Out front in The Bitta Sweet', 1],
+  ['1967-sugarstack.jpg', '1967', 'Sugarstack', 1],
+  ['1968-jug-blues-band.jpg', '1968', 'The Jug Blues Band', 1],
+  ['priest-1969-lineup.jpg', '1969', 'The first Judas Priest', 1],
+  ['priest-c1972-73-drumkit-collage.jpg', '1972', 'Judas Priest', 1],
+  ['priest-1973-stonehenge.jpg', '1973', 'Judas Priest at Stonehenge', 1],
+  ['cover-rocka-rolla-1974.jpg', '1974', 'Rocka Rolla, carrying his songs', 0],
+  ['lion-1970s-band.jpg', '1975', 'Lion', 1],
+  ['cover-sad-wings-of-destiny-1976.jpg', '1976', 'Sad Wings of Destiny, with “Victim of Changes”', 0],
+  ['cover-judgement-day-1990.jpg', '1990', 'Judgement Day', 0],
+  ['cover-dreams-of-avalon-1991.jpg', '1991', 'Dreams of Avalon', 0],
+  ['cover-heavy-thoughts-2003.jpg', '1994', 'Heavy Thoughts', 0],
+  ['cover-victim-of-changes-1998.jpg', '1998', 'Victim of Changes', 0],
+  ['cover-demon-deceiver-2009.jpg', '2007', 'Demon Deceiver', 0],
+  ['cover-holy-rage-2010.jpg', '2010', 'Holy Rage', 0],
+  ['cover-amp-serpents-kiss-2011.jpg', '2011', 'Serpents Kiss, with Paul May', 0],
+  ['cover-reloaded-2017.jpg', '2017', 'Reloaded', 0],
+  ['cover-amp-the-final-cut.jpg', '2020', 'The Final Cut', 0],
+  ['cover-lion-rain-single-2024.jpg', '2024', 'Lion’s “Rain”, out at last', 0],
+  ['../../live-photo.jpg', 'Now', 'Still making heavy music', 1],
+];
+const reelEl = document.getElementById('reel'), reelStack = document.getElementById('reelStack');
+const reelYear = document.getElementById('reelYear'), reelCap = document.getElementById('reelCap'), reelSkip = document.getElementById('reelSkip');
+// it starts unhurried and speeds up, like flicking faster through a crate of records
+const DUR = REEL_ITEMS.map((_, i) => Math.round(440 - 300 * Math.pow(i / (REEL_ITEMS.length - 1), .75)));
+const HOLD = 1100;
+const REEL = reduce ? 0 : DUR.slice(0, -1).reduce((a, b) => a + b, 0) + HOLD;
+const reelTimers = [];
+const reelReady = reduce ? Promise.resolve() : Promise.race([
+  Promise.allSettled(REEL_ITEMS.map(([f]) => { const im = new Image(); im.src = IMG + f; return im.decode(); })),
+  new Promise(r => setTimeout(r, 2500))
+]);
+function showCard(i){
+  const [f, year, cap, photo] = REEL_ITEMS[i], last = i === REEL_ITEMS.length - 1;
+  const card = document.createElement('div'); card.className = 'reel-card' + (photo ? ' is-photo' : '');
+  const img = document.createElement('img'); img.src = IMG + f; img.alt = ''; card.appendChild(img);
+  const rot = last ? 0 : (Math.random() - .5) * 9, dx = last ? 0 : (Math.random() - .5) * 26, dy = last ? 0 : (Math.random() - .5) * 18;
+  // solid almost at once (no ghosting), then it settles onto the pile
+  card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: last ? 380 : 90, easing: 'linear', fill: 'forwards' });
+  card.animate([
+    { transform: `translate(${dx}px, ${dy + 34}px) scale(1.14) rotate(${rot * 2.2}deg)` },
+    { transform: `translate(${dx}px, ${dy}px) scale(${last ? 1.04 : 1}) rotate(${rot}deg)` }
+  ], { duration: last ? 900 : Math.min(420, DUR[i] + 140), easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
+  [...reelStack.children].forEach(c => c.classList.add('is-under'));
+  reelStack.appendChild(card);
+  while (reelStack.children.length > 5) reelStack.firstElementChild.remove();
+  reelYear.textContent = year; reelCap.textContent = cap;
+  reelYear.animate([{ opacity: .35, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.16,1,.3,1)' });
+}
+let reelDone = false;
+function endReel(){
+  if (reelDone) return; reelDone = true;
+  reelTimers.forEach(clearTimeout);
+  reelEl.classList.add('is-out');
+  setTimeout(() => { reelEl.remove(); reelSkip.remove(); }, 1000);
+}
+function playReel(){
+  if (reduce){ reelEl.remove(); reelSkip.remove(); return; }
+  let at = 0;
+  REEL_ITEMS.forEach((_, i) => { reelTimers.push(setTimeout(() => showCard(i), at)); at += DUR[i]; });
+  reelTimers.push(setTimeout(endReel, REEL - 350));
+}
+let start = null;   // set once the reel images have loaded
+reelSkip.addEventListener('click', () => {
+  if (start !== null){
+    const el = performance.now() - start;
+    if (el < REEL) start -= REEL - el;   // jump the stage straight to the end of the reel
+  }
+  endReel();                             // skipped before it began: the start below picks this up
+});
+
+const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+const target = [0, 0], tilt = [0, 0];
+hero.addEventListener('pointermove', e => { target[0] = (e.clientX - rect.left) / rect.width - .5; target[1] = .5 - (e.clientY - rect.top) / rect.height; });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+
+// a tab opened in the background can have no size yet: wait for one before building the stage
+while (!hero.getBoundingClientRect().width) await new Promise(r => setTimeout(r, 100));
+layout();
+/* the arrival, in ms: dark → follow-spot cuts on → crowd rises → rig lights swing onto the name → the hit (CO2 + flash) → the band kicks in */
+const T = { spot: REEL + 120, crowd: REEL + 380, beams: REEL + 850, hit: REEL + 1500 };
+const BPM = 126;
+await reelReady;
+start = performance.now() - (reelDone ? REEL : 0); let step = 0, lastNow = performance.now();
+if (!reelDone) playReel();
+if (reduce){ portrait.classList.add('is-lit'); ready(); }
+
+function frame(now){
+  const ms = reduce ? 1e6 : now - start, t = (now - start) / 1000;
+  const dt = Math.min(.05, (now - lastNow) / 1000); lastNow = now;
+  const spot = ease((ms - T.spot) / 140);
+  const crowdIn = ease((ms - T.crowd) / 1300);
+  const beams = ease((ms - T.beams) / 700);
+  const ck = (ms - T.hit) / 1000;
+  const conv = reduce ? 0 : ms < T.beams || ck < .9 ? 1 : Math.exp(-(ck - .9) * 1.1);
+  const flash = !reduce && ck >= 0 ? Math.exp(-ck * 4.5) : 0;
+  const energy = reduce ? 0 : ease((ck - .3) / 1.4);   // the crowd gets going once the band kicks in
+  if (!reduce){
+    if (step === 0 && ms > T.spot + 150){ portrait.classList.add('is-lit'); step = 1; }
+    if (step === 1 && ck >= 0){ shake(shakeEl, 3, 420); step = 2; }
+    if (step === 2 && ck > .35){ ready(); step = 3; }
+  }
+  tilt[0] += (target[0] - tilt[0]) * .04; tilt[1] += (target[1] - tilt[1]) * .04;
+
+  gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniform2f(U('uRes'), W, H); gl.uniform1f(U('uTime'), t + 40); gl.uniform1f(U('uSpot'), spot); gl.uniform1f(U('uBeams'), beams);
+  gl.uniform1f(U('uChord'), conv); gl.uniform1f(U('uFlash'), flash); gl.uniform2f(U('uAim'), aim[0], aim[1]);
+  gl.uniform1f(U('uRigY'), 1 - heads[0][1] / H);
+  gl.uniform2f(U('uTilt'), tilt[0], tilt[1]); gl.uniform4f(U('uBox'), ...L.box); gl.uniform1i(U('uMask'), 0);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+  ctx.clearRect(0, 0, W, H);
+  // the stage fades up with the lights; top edges catch the light
+  ctx.globalAlpha = Math.max(spot * .3, beams); ctx.drawImage(stageC, 0, 0); ctx.globalAlpha = 1;
+  ctx.fillStyle = `rgba(200,210,255,${(.1 + conv * .25 + flash * .4) * beams})`;
+  for (const [x, y, w] of edges) ctx.fillRect(x, y, w, Math.max(1, dpr * 1.2));
+  ctx.fillStyle = `rgba(190,200,240,${(.06 + conv * .12) * beams})`; ctx.fillRect(0, floorY, W, Math.max(1, dpr));
+  // fixture lenses glow in their beam colour
+  ctx.globalCompositeOperation = 'lighter';
+  heads.forEach(([x, y], i) => {
+    const a = beams * (.55 + conv * .45), g = ctx.createRadialGradient(x, y, 0, x, y, 22 * dpr);
+    g.addColorStop(0, `rgba(${FIX_C[i]},${a})`); g.addColorStop(.25, `rgba(${FIX_C[i]},${a * .35})`); g.addColorStop(1, `rgba(${FIX_C[i]},0)`);
+    ctx.fillStyle = g; ctx.fillRect(x - 22 * dpr, y - 22 * dpr, 44 * dpr, 44 * dpr);
+  });
+  // CO2 jets: one blast at the hit, then gone
+  if (!reduce && ck > 0 && ck < 2.6){
+    const grow = ease(ck / .22), fade = Math.exp(-Math.max(0, ck - .25) * 1.5);
+    for (const jx of jets){
+      const h = (floorY - H * .3) * grow;
+      for (let k = 0; k < 14; k++){
+        const f = k / 13, y = floorY - h * f, w = (10 + f * 70) * dpr * (1 + ck * .4);
+        const g = ctx.createRadialGradient(jx, y, 0, jx, y, w);
+        g.addColorStop(0, `rgba(235,240,255,${.16 * fade * (1 - f * .6)})`); g.addColorStop(1, 'rgba(235,240,255,0)');
+        ctx.fillStyle = g; ctx.fillRect(jx - w, y - w, w * 2, w * 2);
+      }
+    }
+  }
+  ctx.globalCompositeOperation = 'source-over';
+
+  // the crowd
+  const drop = (1 - crowdIn) * 200 * dpr, rim = (.1 + conv * .3 + flash * .3) * beams;
+  const beat = t * BPM / 60;
+  const drawRow = row => { for (const p of row){
+    const b = beat + p.off, bp = b - Math.floor(b);
+    const hop = Math.pow(Math.abs(Math.sin(Math.PI * bp)), .8);
+    const pk = ck - p.delay * .4;
+    let lift = !reduce && pk > 0 && pk < .55 ? Math.sin(pk / .55 * Math.PI) * p.r * 1.1 * p.jump : 0;
+    lift += energy * hop * p.r * (p.kind === 'jump' ? 1.15 * p.jump : .14);
+    const bang = p.kind === 'bang' ? energy * (.5 - .5 * Math.cos(6.283 * b)) : 0;
+    const raised = reduce ? 1 : ease((ck - p.delay) / .6);
+    let arm = 0, armKind = p.arm;
+    if (p.kind === 'fist'){ armKind = 'fist'; arm = raised * (.55 + .45 * energy * (.5 + .5 * Math.cos(6.283 * b))); }
+    else if (p.kind === 'horns'){ armKind = 'horns'; arm = raised * (.9 + .1 * Math.sin(t * .7 + p.ph)); }
+    else if (p.kind === 'jump' && p.arm){ arm = raised * (.75 + .25 * hop * energy); }
+    person(p.x, p.y + drop - lift, p.r, bang, arm, armKind, p.side, p.reach, p.hair, p.hairLen, rim, Math.sin(t * .6 + p.ph));
+  } };
+  drawRow(rows[0]); drawRow(rows[1]);
+  drawRow(rows[2]);
+}
+if (reduce){ frame(performance.now()); } else loop(hero, frame);
+</script>
+<script>
+(() => {
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* the corner record: turns slowly all the time, spins up on hover/focus, coasts back down */
+const rec = document.getElementById('cornerRec'), vinyl = document.getElementById('vinyl');
+const IDLE = 30, FAST = 240; // degrees per second
+let ang = 0, vel = IDLE, target = IDLE, last = performance.now();
+function spin(now){
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  vel += (target - vel) * Math.min(1, (target > vel ? 3.2 : 1.2) * dt);
+  ang = (ang + vel * dt) % 360; vinyl.style.transform = `rotate(${ang.toFixed(2)}deg)`;
+  requestAnimationFrame(spin);
+}
+if (!reduce){
+  requestAnimationFrame(spin);
+  const up = () => { target = FAST; }, down = () => { target = IDLE; };
+  rec.addEventListener('pointerenter', up); rec.addEventListener('pointerleave', down);
+  rec.addEventListener('focus', up); rec.addEventListener('blur', down);
+}
+
+/* chrome buttons: a crackle of lightning runs round the edge on hover */
+function outline(w, h, jit){
+  const r = h / 2, L = w - 2 * r, P = 2 * L + 2 * Math.PI * r, pts = [];
+  for (let s = 0; s < P; s += 5){
+    let x, y, nx, ny;
+    if (s < L){ x = r + s; y = 0; nx = 0; ny = -1; }
+    else if (s < L + Math.PI * r){ const a = -Math.PI / 2 + (s - L) / r; nx = Math.cos(a); ny = Math.sin(a); x = w - r + nx * r; y = r + ny * r; }
+    else if (s < 2 * L + Math.PI * r){ x = w - r - (s - L - Math.PI * r); y = h; nx = 0; ny = 1; }
+    else { const a = Math.PI / 2 + (s - 2 * L - Math.PI * r) / r; nx = Math.cos(a); ny = Math.sin(a); x = r + nx * r; y = r + ny * r; }
+    const j = (Math.random() - .5) * 2 * jit;
+    pts.push((x + nx * j + 10).toFixed(1) + ' ' + (y + ny * j + 10).toFixed(1));
+  }
+  return 'M' + pts.join('L') + 'Z';
+}
+document.querySelectorAll('.spark').forEach(btn => {
+  const svg = btn.querySelector('.crackle'), [glow, core] = svg.querySelectorAll('path');
+  let live = false, off = 0, lastGen = 0, lastT = 0;
+  [glow, core].forEach(p => p.setAttribute('pathLength', '100'));
+  function draw(jit){
+    const w = btn.offsetWidth, h = btn.offsetHeight;
+    svg.setAttribute('viewBox', `0 0 ${w + 20} ${h + 20}`);
+    const d = outline(w, h, jit); glow.setAttribute('d', d); core.setAttribute('d', d);
+  }
+  function tick(now){
+    if (!live) return;
+    const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
+    if (now - lastGen > 45){ draw(2.6); lastGen = now; }
+    off -= dt * 90;
+    [glow, core].forEach(p => p.setAttribute('stroke-dashoffset', off.toFixed(2)));
+    requestAnimationFrame(tick);
+  }
+  const on = () => {
+    btn.classList.add('is-live');
+    if (reduce){ draw(0); [glow, core].forEach(p => p.removeAttribute('stroke-dasharray')); return; }
+    [glow, core].forEach(p => p.setAttribute('stroke-dasharray', '18 32'));
+    if (!live){ live = true; lastT = lastGen = performance.now(); draw(2.6); requestAnimationFrame(tick); }
+  };
+  const offFn = () => { btn.classList.remove('is-live'); setTimeout(() => { if (!btn.classList.contains('is-live')) live = false; }, 250); };
+  btn.addEventListener('pointerenter', on); btn.addEventListener('pointerleave', offFn);
+  btn.addEventListener('focus', on); btn.addEventListener('blur', offFn);
+});
+})();
+</script>
+<script>
+/* ── Reveals, timeline heat line, record tilt ── */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -10% 0px'});
+  document.querySelectorAll('.rise').forEach(el => io.observe(el));
+
+  const tl = document.querySelector('.tl');
+  if (tl){
+    const fill = tl.querySelector('.tl-fill'); const eras = [...tl.querySelectorAll('.era')];
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const r = tl.getBoundingClientRect(); const line = innerHeight * .62;
+      const p = Math.min(1, Math.max(0, (line - r.top) / r.height));
+      fill.style.transform = `scaleY(${p})`;
+      eras.forEach(e => e.classList.toggle('is-hot', e.getBoundingClientRect().top < line));
+    };
+    addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
+    addEventListener('resize', update); update();
+  }
+
+  if (!reduce && matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.record').forEach(rec => {
+      const art = rec.querySelector('.record-art');
+      rec.addEventListener('pointermove', e => {
+        const r = art.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        art.style.setProperty('--ry', `${(x - .5) * 14}deg`); art.style.setProperty('--rx', `${(.5 - y) * 14}deg`);
+        art.style.setProperty('--gx', `${x * 100}%`); art.style.setProperty('--gy', `${y * 100}%`);
+      });
+      rec.addEventListener('pointerleave', () => { art.style.setProperty('--ry', '0deg'); art.style.setProperty('--rx', '0deg'); });
+    });
+  }
+})();
+
+/* ── Nav behaviour ── */
+(() => {
+  const nav = document.getElementById('nav'); let last = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY; nav.classList.toggle('is-solid', y > 40);
+    nav.classList.toggle('is-hidden', y > last && y > innerHeight * .8 && !nav.classList.contains('is-open')); last = y;
+  }, {passive:true});
+  const btn = nav.querySelector('.nav-toggle');
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('is-open'); btn.setAttribute('aria-expanded', o); });
+  nav.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => { nav.classList.remove('is-open'); btn.setAttribute('aria-expanded', false); }));
+})();
+</script>
+</body>
+</html>
