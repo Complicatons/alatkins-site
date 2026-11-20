@@ -425,6 +425,12 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
   background:linear-gradient(180deg, var(--whitehot) -30%, var(--flame) 40%, var(--ember) 130%);
   box-shadow:0 1px 0 rgba(255,244,214,.5) inset, 0 6px 14px -6px rgba(226,84,27,.6)}
 .sound[data-state="playing"] .sound-act{color:var(--bone);background:rgba(15,11,9,.6);box-shadow:0 0 0 1px rgba(169,177,184,.3) inset}
+/* hover: the Mute / Unmute button heats to red (crossfaded layer, so only opacity animates) */
+.sound-act{position:relative;isolation:isolate;overflow:hidden}
+.sound-act::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;opacity:0;transition:opacity .25s var(--ease-out);
+  background:linear-gradient(180deg,#FF6A3D -30%,var(--blood) 55%,var(--crimson) 130%);box-shadow:0 0 0 1px rgba(255,181,71,.45) inset}
+.sound.is-on:hover .sound-act::before,.sound:focus-visible .sound-act::before{opacity:1}
+.sound.is-on:hover .sound-act,.sound:focus-visible .sound-act{color:var(--whitehot)}
 .sound-act svg{width:20px;height:20px;flex:none}
 .sound-act .ico-off{display:none}
 .sound:not([data-state="playing"]) .ico-on{display:none}
