@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Grenze+Gotisch:wght@500..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Grenze+Gotisch:wght@500..900&family=Reenie+Beanie&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 /* ── Tokens ─────────────────────────────────────────────
@@ -367,7 +367,7 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
    Fixed bottom-left on every scroll position. One big button so the mute is impossible to miss. */
 .sound-frame{position:fixed;left:-10000px;top:0;width:200px;height:200px;opacity:0;pointer-events:none}
 .sound{position:fixed;z-index:70;left:var(--gutter);bottom:20px;display:flex;align-items:center;gap:14px;
-  min-height:56px;padding:8px 8px 8px 16px;border:0;border-radius:999px;cursor:pointer;text-align:left;color:var(--bone);
+  padding:8px 14px 8px 8px;border:0;border-radius:16px;cursor:pointer;text-align:left;color:var(--bone);
   font:500 13px/1.25 var(--sans);font-variation-settings:"wdth" 92;
   background:linear-gradient(180deg, rgba(51,43,38,.92), rgba(23,18,15,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   box-shadow:0 0 0 1px rgba(169,177,184,.22) inset, var(--lift-2);
@@ -376,27 +376,51 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
 .sound.is-on{opacity:1;transform:none;pointer-events:auto}
 .sound.is-on:hover{transform:translateY(-2px)}
 .sound.is-on:active{transform:translateY(1px) scale(.98)}
-.sound:focus-visible{outline:2px solid var(--flame);outline-offset:4px;border-radius:999px}
+.sound:focus-visible{outline:2px solid var(--flame);outline-offset:4px;border-radius:16px}
 /* attention ring while the browser is holding the sound back */
 .sound::after{content:"";position:absolute;inset:-5px;border-radius:inherit;pointer-events:none;opacity:0;
   box-shadow:0 0 0 2px var(--flame), 0 0 26px 2px rgba(226,84,27,.55)}
 .sound[data-state="waiting"]::after{animation:soundCall 1.8s var(--ease-out) infinite}
 @keyframes soundCall{0%,100%{opacity:0}45%{opacity:1}}
 
-.sound-eq{display:flex;align-items:flex-end;gap:3px;height:22px;flex:none}
-.sound-eq i{width:4px;height:100%;border-radius:2px;transform-origin:bottom;transform:scaleY(.2);
-  background:linear-gradient(to top, var(--ember), var(--flame) 70%, var(--whitehot))}
-.sound[data-state="playing"] .sound-eq i{animation:eq 1s ease-in-out infinite alternate}
-.sound-eq i:nth-child(2){animation-delay:-.35s !important;animation-duration:.8s !important}
-.sound-eq i:nth-child(3){animation-delay:-.7s !important;animation-duration:1.15s !important}
-.sound-eq i:nth-child(4){animation-delay:-.2s !important;animation-duration:.9s !important}
-@keyframes eq{0%{transform:scaleY(.18)}50%{transform:scaleY(.95)}100%{transform:scaleY(.45)}}
+/* the demo tape: title in biro on the label, reels turn only while the song plays */
+.tape{position:relative;width:120px;height:76px;flex:none;border-radius:8px;
+  background:linear-gradient(180deg,#3b332d,#211b17);
+  box-shadow:0 1px 0 rgba(255,244,214,.14) inset, 0 0 0 1px rgba(255,244,214,.06) inset, 0 4px 10px -4px rgba(0,0,0,.7)}
+.tape::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:
+    radial-gradient(circle at 5px 5px,#857c73 0 1.5px,transparent 2.1px),
+    radial-gradient(circle at calc(100% - 5px) 5px,#857c73 0 1.5px,transparent 2.1px),
+    radial-gradient(circle at 5px calc(100% - 5px),#857c73 0 1.5px,transparent 2.1px),
+    radial-gradient(circle at calc(100% - 5px) calc(100% - 5px),#857c73 0 1.5px,transparent 2.1px)}
+.tape-label{position:absolute;left:9px;right:9px;top:7px;height:45px;border-radius:3px;overflow:hidden;
+  background:
+    linear-gradient(90deg,var(--ember),var(--flame)) 0 21px/100% 3.5px no-repeat,
+    repeating-linear-gradient(to bottom,#EEE5D1 0 7px,#DCCFB4 7px 8px);
+  box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.tape-hand{position:absolute;left:4px;top:1px;font:400 16px/1 "Reenie Beanie","Segoe Print",cursive;color:#22306B;white-space:nowrap;transform:rotate(-2deg)}
+.tape-window{position:absolute;left:50%;top:33px;width:72px;height:22px;margin-left:-36px;border-radius:11px/8px;overflow:hidden;
+  background:#0c0907;box-shadow:inset 0 2px 5px rgba(0,0,0,.9), 0 0 0 1.5px #4a413a}
+.tape-window::after{content:"";position:absolute;inset:0;background:linear-gradient(170deg,rgba(255,255,255,.14),transparent 45%)}
+.tape-pack{position:absolute;top:50%;border-radius:50%;background:repeating-radial-gradient(circle,#3d2618 0 1px,#2e1b11 1px 2px)}
+.tape-pack.l{left:-3px;width:38px;height:38px;margin-top:-19px}
+.tape-pack.r{right:3px;width:26px;height:26px;margin-top:-13px}
+.tape-reel{position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;
+  background:
+    radial-gradient(circle,#0c0907 0 2.4px,transparent 2.8px),
+    repeating-conic-gradient(#ECE3D4 0 18deg,transparent 18deg 60deg);
+  -webkit-mask:radial-gradient(circle,#000 0 8.5px,transparent 9px);mask:radial-gradient(circle,#000 0 8.5px,transparent 9px);
+  animation:reel 1.7s linear infinite;animation-play-state:paused}
+.tape-reel.l{left:7px}.tape-reel.r{right:7px;animation-duration:1.15s}
+.sound[data-state="playing"] .tape-reel{animation-play-state:running}
+@keyframes reel{to{transform:rotate(360deg)}}
+.sound-stack{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
 
 .sound-track{display:flex;flex-direction:column}
 .sound-track b{font:700 15px/1.2 var(--sans);color:var(--whitehot);font-variation-settings:"wdth" 96}
 .sound-track span{color:var(--ash)}
 
-.sound-act{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;border-radius:999px;
+.sound-act{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px 0 11px;white-space:nowrap;border-radius:999px;
   font:700 15px/1 var(--sans);color:#1b0d06;
   background:linear-gradient(180deg, var(--whitehot) -30%, var(--flame) 40%, var(--ember) 130%);
   box-shadow:0 1px 0 rgba(255,244,214,.5) inset, 0 6px 14px -6px rgba(226,84,27,.6)}
@@ -406,15 +430,15 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
 .sound:not([data-state="playing"]) .ico-on{display:none}
 .sound:not([data-state="playing"]) .ico-off{display:block}
 @media (max-width:520px){
-  .sound{left:16px;bottom:16px;gap:10px;padding-left:12px}
-  .sound-track span{display:none}
-  .sound-track b{font-size:13px}
-  .hero .corner-rec{bottom:88px}   /* sit above the song pill on phones */
+  .sound{left:16px;bottom:16px;gap:12px;padding:7px 10px 7px 7px}
+  .sound-track{display:none}       /* the title is already written on the tape */
+  .tape{zoom:.82}                  /* keeps clear of the hero's social buttons */
+  .hero .corner-rec{bottom:118px}  /* sit above the tape on phones */
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce){
-  .sound[data-state="playing"] .sound-eq i{animation:none;transform:scaleY(.7)}
+  .tape-reel{animation:none}
   .sound[data-state="waiting"]::after{animation:none;opacity:1}
   html{scroll-behavior:auto}
   .grain{animation:none}
@@ -445,12 +469,17 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
 
 <div class="sound-frame" aria-hidden="true"><div id="yt-song"></div></div>
 <button class="sound" id="sound" type="button" data-state="loading">
-  <span class="sound-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="tape" aria-hidden="true">
+    <span class="tape-label"><span class="tape-hand">Victim of Changes</span></span>
+    <span class="tape-window"><span class="tape-pack l"></span><span class="tape-pack r"></span><span class="tape-reel l"></span><span class="tape-reel r"></span></span>
+  </span>
+  <span class="sound-stack">
   <span class="sound-track"><b>Victim of Changes</b><span>Al Atkins</span></span>
   <span class="sound-act">
     <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     <svg class="ico-off" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     <span class="sound-label">Loading</span>
+  </span>
   </span>
 </button>
 
