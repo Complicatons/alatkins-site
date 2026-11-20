@@ -363,8 +363,59 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
 .text-link{color:var(--flame);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:opacity .2s}
 .text-link:hover{opacity:.8}
 
+/* ── Background song: "Victim of Changes" ──
+   Fixed bottom-left on every scroll position. One big button so the mute is impossible to miss. */
+.sound-frame{position:fixed;left:-10000px;top:0;width:200px;height:200px;opacity:0;pointer-events:none}
+.sound{position:fixed;z-index:70;left:var(--gutter);bottom:20px;display:flex;align-items:center;gap:14px;
+  min-height:56px;padding:8px 8px 8px 16px;border:0;border-radius:999px;cursor:pointer;text-align:left;color:var(--bone);
+  font:500 13px/1.25 var(--sans);font-variation-settings:"wdth" 92;
+  background:linear-gradient(180deg, rgba(51,43,38,.92), rgba(23,18,15,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 0 0 1px rgba(169,177,184,.22) inset, var(--lift-2);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .5s var(--ease-out), transform .6s var(--spring)}
+.sound.is-on{opacity:1;transform:none;pointer-events:auto}
+.sound.is-on:hover{transform:translateY(-2px)}
+.sound.is-on:active{transform:translateY(1px) scale(.98)}
+.sound:focus-visible{outline:2px solid var(--flame);outline-offset:4px;border-radius:999px}
+/* attention ring while the browser is holding the sound back */
+.sound::after{content:"";position:absolute;inset:-5px;border-radius:inherit;pointer-events:none;opacity:0;
+  box-shadow:0 0 0 2px var(--flame), 0 0 26px 2px rgba(226,84,27,.55)}
+.sound[data-state="waiting"]::after{animation:soundCall 1.8s var(--ease-out) infinite}
+@keyframes soundCall{0%,100%{opacity:0}45%{opacity:1}}
+
+.sound-eq{display:flex;align-items:flex-end;gap:3px;height:22px;flex:none}
+.sound-eq i{width:4px;height:100%;border-radius:2px;transform-origin:bottom;transform:scaleY(.2);
+  background:linear-gradient(to top, var(--ember), var(--flame) 70%, var(--whitehot))}
+.sound[data-state="playing"] .sound-eq i{animation:eq 1s ease-in-out infinite alternate}
+.sound-eq i:nth-child(2){animation-delay:-.35s !important;animation-duration:.8s !important}
+.sound-eq i:nth-child(3){animation-delay:-.7s !important;animation-duration:1.15s !important}
+.sound-eq i:nth-child(4){animation-delay:-.2s !important;animation-duration:.9s !important}
+@keyframes eq{0%{transform:scaleY(.18)}50%{transform:scaleY(.95)}100%{transform:scaleY(.45)}}
+
+.sound-track{display:flex;flex-direction:column}
+.sound-track b{font:700 15px/1.2 var(--sans);color:var(--whitehot);font-variation-settings:"wdth" 96}
+.sound-track span{color:var(--ash)}
+
+.sound-act{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;border-radius:999px;
+  font:700 15px/1 var(--sans);color:#1b0d06;
+  background:linear-gradient(180deg, var(--whitehot) -30%, var(--flame) 40%, var(--ember) 130%);
+  box-shadow:0 1px 0 rgba(255,244,214,.5) inset, 0 6px 14px -6px rgba(226,84,27,.6)}
+.sound[data-state="playing"] .sound-act{color:var(--bone);background:rgba(15,11,9,.6);box-shadow:0 0 0 1px rgba(169,177,184,.3) inset}
+.sound-act svg{width:20px;height:20px;flex:none}
+.sound-act .ico-off{display:none}
+.sound:not([data-state="playing"]) .ico-on{display:none}
+.sound:not([data-state="playing"]) .ico-off{display:block}
+@media (max-width:520px){
+  .sound{left:16px;bottom:16px;gap:10px;padding-left:12px}
+  .sound-track span{display:none}
+  .sound-track b{font-size:13px}
+  .hero .corner-rec{bottom:88px}   /* sit above the song pill on phones */
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce){
+  .sound[data-state="playing"] .sound-eq i{animation:none;transform:scaleY(.7)}
+  .sound[data-state="waiting"]::after{animation:none;opacity:1}
   html{scroll-behavior:auto}
   .grain{animation:none}
   *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important;animation-iteration-count:1 !important}
@@ -391,6 +442,17 @@ figcaption{font-size:14px;line-height:1.5;color:var(--ash);margin-top:var(--s2);
     </ul>
   </nav>
 </header>
+
+<div class="sound-frame" aria-hidden="true"><div id="yt-song"></div></div>
+<button class="sound" id="sound" type="button" data-state="loading">
+  <span class="sound-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="sound-track"><b>Victim of Changes</b><span>Al Atkins</span></span>
+  <span class="sound-act">
+    <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <svg class="ico-off" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <span class="sound-label">Loading</span>
+  </span>
+</button>
 
 <main id="top">
 <section class="hero" id="hero" aria-label="Al Atkins">
@@ -1249,6 +1311,76 @@ document.querySelectorAll('.spark').forEach(btn => {
   const btn = nav.querySelector('.nav-toggle');
   btn.addEventListener('click', () => { const o = nav.classList.toggle('is-open'); btn.setAttribute('aria-expanded', o); });
   nav.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => { nav.classList.remove('is-open'); btn.setAttribute('aria-expanded', false); }));
+})();
+
+/* ── Background song (YouTube, audio only) ──
+   Browsers won't play sound before the visitor has interacted with the page, so:
+   try to start with sound → if blocked, start on the first tap/click/key anywhere.
+   A visitor who mutes stays muted on later visits. */
+(() => {
+  const VIDEO = 'adgLXEdvGRc';
+  const btn = document.getElementById('sound');
+  const label = btn.querySelector('.sound-label');
+  const LABELS = { loading:'Loading', playing:'Mute', paused:'Unmute', waiting:'Turn sound on' };
+  const pref = { get(){ try { return localStorage.getItem('aa-sound'); } catch(e){ return null; } },
+                 set(v){ try { localStorage.setItem('aa-sound', v); } catch(e){} } };
+  let player = null, state = 'loading', blockTimer = 0;
+
+  const setState = s => { state = s; btn.dataset.state = s; label.textContent = LABELS[s]; };
+
+  const start = () => {
+    clearTimeout(blockTimer);
+    player.unMute(); player.setVolume(80); player.playVideo();
+    if (state !== 'playing') setState('loading');
+    // if nothing is audible shortly, the browser blocked it: wait for a gesture
+    armBlockTimer(4000);
+  };
+  const armBlockTimer = ms => {
+    clearTimeout(blockTimer);
+    blockTimer = setTimeout(() => { if (state === 'loading'){ player.pauseVideo(); setState('waiting'); } }, ms);
+  };
+  const stop = () => { clearTimeout(blockTimer); player.pauseVideo(); setState('paused'); };
+
+  btn.addEventListener('click', () => {
+    if (!player) return;
+    if (state === 'playing' || state === 'loading'){ pref.set('off'); stop(); }
+    else { pref.set('on'); start(); }
+  });
+
+  // first interaction anywhere on the page unlocks sound
+  const unlock = e => {
+    if (btn.contains(e.target)) return;            // the button handles its own click
+    if (state === 'waiting') start();
+    if (state !== 'loading') ['pointerdown','keydown','touchend'].forEach(t => removeEventListener(t, unlock, true));
+  };
+  ['pointerdown','keydown','touchend'].forEach(t => addEventListener(t, unlock, true));
+
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player('yt-song', {
+      videoId: VIDEO, width: 200, height: 200,
+      playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, loop: 1, playlist: VIDEO, playsinline: 1, rel: 0, origin: location.origin },
+      events: {
+        onReady: () => {
+          const f = player.getIframe(); f.setAttribute('tabindex', '-1'); f.title = 'Victim of Changes by Al Atkins (background audio)';
+          btn.classList.add('is-on');
+          if (pref.get() === 'off') setState('paused'); else start();
+        },
+        onStateChange: e => {
+          if (e.data === YT.PlayerState.PLAYING){
+            if (player.isMuted() || state === 'paused' || state === 'waiting'){ player.pauseVideo(); if (state === 'loading') setState('waiting'); return; }
+            clearTimeout(blockTimer); setState('playing');
+          } else if (e.data === YT.PlayerState.BUFFERING && state === 'loading'){
+            armBlockTimer(10000);                    // slow connection, not blocked: give it longer
+          } else if (e.data === YT.PlayerState.PAUSED && state === 'loading'){
+            clearTimeout(blockTimer); setState('waiting');   // browser refused to play with sound
+          } else if (e.data === YT.PlayerState.ENDED){ player.seekTo(0); player.playVideo(); }
+        },
+        onError: () => btn.classList.remove('is-on')
+      }
+    });
+  };
+  const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.async = true;
+  document.head.appendChild(s);
 })();
 </script>
 </body>
